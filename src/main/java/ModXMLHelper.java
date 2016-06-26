@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
+import org.testng.Assert;
 
 /**
  * Objective: <br>
@@ -23,10 +24,11 @@ import org.jsoup.select.Elements;
  */
 public class ModXMLHelper {
 
+	boolean debug = false;
 	String xmlModsFolder = "XmlMods";
 
 	// Until I have a fuller UI, this will service skipping mods - woe be to those with a fear of manual labor :)
-	String xmlModsExclusionsFile = "XmlMods/exclusions.txt";
+	String xmlModsExclusionsFileTarget = "XmlMods/XmlFilesToExcludeFromBuilding.txt";
 	String missionXMLTarget = "Levels/Class3/mission_mission0.xml";
 	String facilitiesXMLTarget = "Libs/Prefabs/facilities.xml";
 	String originalMissionXMLTarget = "Levels/Class3/mission_mission0.original.xml";
@@ -109,9 +111,40 @@ public class ModXMLHelper {
 	 */
 	public void findAllXmlModFilesAndBuildThem () throws Exception {
 
-		Iterator<File> iterator = FileUtils.iterateFiles(new File(xmlModsFolder), new String[]{".xml"}, false);
-		while (iterator.hasNext()) {
-			modXMLs.add(buildModXMLDOM(iterator.next().getPath()));
+		File xmlModsExclusionsFile = new File(xmlModsExclusionsFileTarget);
+		
+		if (!xmlModsExclusionsFile.exists()) {
+			
+			FileUtils.write(xmlModsExclusionsFile, "XmlMods\\CopyMe-ModXMLTemplate.xml", "UTF-8");
+		}
+		
+		List<String> xmlModsExclusions = new ArrayList<>(
+				FileUtils.readLines(xmlModsExclusionsFile, "UTF-8"));
+		File directory = new File(xmlModsFolder);
+		
+		if (directory.exists()) {
+			Iterator<File> iterator = FileUtils.iterateFiles(directory, new String[]{"xml"}, false);
+			
+			while (iterator.hasNext()) {
+				String path = iterator.next().getPath();
+				System.out.println("XML Iterator found XML file: " + path);
+				
+				if (!xmlModsExclusions.contains(path)) {
+					modXMLs.add(buildModXMLDOM(path));
+				} else {
+					System.out.println("[SKIPPED] - XML file was excluded: " + path);
+				}
+			}
+		} else {
+			String msg = "[ERROR] - XmlMods directory does not exist?";
+			System.out.println(msg);
+			Assert.fail(msg);
+		}
+		
+		if (modXMLs.isEmpty()) {
+			String msg = "[ERROR] - Found NO XML Files in XmlMods directory...";
+			System.out.println(msg);
+			Assert.fail(msg);
 		}
 	}
 
@@ -140,8 +173,12 @@ public class ModXMLHelper {
 		for (ModXML modXml : modXMLs) {
 			for (ModChangeObjectContainer container : modXml.getModObjects() ) {
 				handleChangesForMod(container);
+				System.out.println("\n\n[INFO] - Completed handling for [file][mod_name][mod_section]: ["
+						+ container.getFileToMod() + "][" + container.getModName() + "][" + container.getModSegment() + "]\n\n");
 			}
 		}
+		
+		System.out.println("\n\n[INFO] - Finished handling all Mods - Huzzah!");
 	}
 
 	/**
@@ -252,7 +289,9 @@ public class ModXMLHelper {
 
 		parentToAddTo.prepend(modWrapper.select("ModWrapper").last().toString());
 
-		System.out.println(parentToAddTo.toString());
+		if (debug) {
+			System.out.println(parentToAddTo.select("[mod_name=" + modContainerElement.getModName() + "]"));
+		}
 
 		return parentToAddTo;
 	}

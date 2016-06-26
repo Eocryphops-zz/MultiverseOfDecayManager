@@ -87,4 +87,14 @@ public class TestManagerXmlFileHandling {
 			Assert.fail("Failed to remove elements from XML, error was: \n" + e.getMessage());
 		}
 	}
+	
+	@Test (description = "Test finding XML files in XmlMods Directory")
+	public void testGatherXmlFilesFromXmlModsDir () {
+		try {
+			modXMLHelper.findAllXmlModFilesAndBuildThem();
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Failed to find XML files in XmlMods Directory, error was: \n" + e.getMessage());
+		}
+	}
 }

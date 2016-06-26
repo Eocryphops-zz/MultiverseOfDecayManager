@@ -1,0 +1,1 @@
+XmlMods\CopyMe-ModXMLTemplate.xml

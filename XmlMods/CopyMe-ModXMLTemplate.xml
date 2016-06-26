@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
 
-<!-- Your mod details to uniquely identify you - mod_name eould preferably be unique, and reasonably short, which should hold true for your name - perhaps your online alias-->
+<!-- Your mod details to uniquely identify you - mod_name would preferably be unique, and reasonably short, 
+which should hold true for your name - perhaps your online alias-->
 <ModData mod_name="NAME_OF_MOD" mod_author="AUTHOR_OF_MOD">
 
 	<!-- Anything that needs to be added to the Facilities.xml needs a sub-object placed here -->
@@ -12,7 +13,8 @@
 		
 		To have multiple objects, it operates like any normal XML file, 
 		where you just add another instance of 'Objects' into the proper container with the requested metadata -->
-		<Objects name="LOCATION_Objects" mod_segment="SEGMENT_NAME" parent_tag="ELEMENT_TYPE_TO_ADD_THIS_TO" parent_name="ELEMENT_NAME_TO_ADD_THIS_TO">
+		<Objects name="LOCATION_Objects" mod_segment="SEGMENT_NAME" parent_tag="ELEMENT_TYPE_TO_ADD_THIS_TO" 
+			parent_name="ELEMENT_NAME_TO_ADD_THIS_TO">
 			<!-- When adding an Object, note that the manager will apply your mod_name, as the last XML attribute, your mod_name -->
 			<Object Type="Brush" Name="UNIQUE_NAME" />
 		</Objects>
@@ -25,14 +27,16 @@
 	
 	
 	<!-- Anything that needs to be added to the Mission_Mission0.xml needs a sub-object placed here.
-	Note that the only time this should happen is things like Entities, or Time of Day changes (a feature which is uncommon so I'll handle that later)-->
+		Note that the only time this should happen is things like Entities, or Time of Day changes 
+			(a feature which is uncommon so I'll handle that later)-->
 	<MissionData>
 		<Objects name="NAME_Entities" mod_segment="SEGMENT_NAME" parent_tag="Objects">
 			<Object Name="UNIQUE_NAME"/>
 		</Objects>
 		
 		<!-- Example
-			Note: Mission_Mission0.xml items can be of many element types - only the <Objects> containers are relevant to the template -->
+			Note: Mission_Mission0.xml items can be of many element types - 
+				only the <Objects> containers are relevant to the template -->
 		<Objects name="Savini_Entities" mod_segment="Savini/Riverside" parent_tag="Objects">
 			<!-- Don't try to use this in a real mod - I chopped it up so it was a clearer example ;) -->
 			<Entity Name="SaviniEntity" Pos="1501.3844,800.42261,101.17547" EntityClass="SurveyPoint" EntityId="4370" EntityGuid="403D4E79B3B28330"/>

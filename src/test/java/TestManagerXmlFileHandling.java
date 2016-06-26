@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jsoup.nodes.Document;
+import org.dom4j.Document;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -32,20 +32,6 @@ public class TestManagerXmlFileHandling {
 	}
 	
 	@Test (description = "Test that we can properly parse the XML data")
-	public void testOpenAndParse () {
-		try {
-			String fileContents = FileUtil.readFileContents(modTestXMLFileTarget);
-			System.out.println("FileUtil successfully read XML contents, now testing parsing of raw String");
-			
-			Document DOM = modXMLHelper.buildXMLFromString(fileContents);
-			System.out.println("XMLHelper successfully read XML contents, DOM is: \n" + DOM.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail("Failed to build and parse XML file with XMLHelper, error was: \n" + e.getMessage());
-		}
-	}
-	
-	@Test (description = "Test that we can properly parse the XML data")
 	public void testOpenAndParseWithOnlyXMLHelper () {
 		try {
 			Document DOM = modXMLHelper.getXmlFileAndBuild(modTestXMLFileTarget);
@@ -57,7 +43,7 @@ public class TestManagerXmlFileHandling {
 	}
 	
 	@Test (description = "Test XML element insertion")
-	public void testInsertElementsIntoXMLDOM () {
+	public void testFullHandling () {
 		try {
 			List<ModXML> modList = new ArrayList<ModXML>();
 			modList.add(new ModXML(modXMLHelper.getXmlFileAndBuild(modTestXMLFileTarget)));
@@ -66,10 +52,20 @@ public class TestManagerXmlFileHandling {
 			modXMLHelper.setFacilitiesXMLTarget(facilitiesTestXMLFileTarget);
 			modXMLHelper.setMissionXMLTarget(missionTestXMLFileTarget);
 			
-			modXMLHelper.handleAllMods();
+			modXMLHelper.handleAllMods(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed to insert elements into XML, error was: \n" + e.getMessage());
+		}
+	}
+	
+	
+	
+	private void getNodeRemoveAndConfirm (Document DOM, String nodeTarget) {
+		DOM.selectSingleNode(nodeTarget).detach();
+		if (DOM.selectSingleNode(nodeTarget) != null) {
+			Assert.fail("Failed to remove element from XML, element was: "
+					+ nodeTarget);
 		}
 	}
 	
@@ -77,11 +73,14 @@ public class TestManagerXmlFileHandling {
 	public void testRemoveElementsFromXMLDOM () {
 		try {
 			Document DOM = modXMLHelper.getXmlFileAndBuild(facilitiesTestXMLFileTarget);
-			DOM.select("Prefab[name=warehouse.workshop] Objects Object[Name=folding_chair26]").remove();
-			DOM.select("Prefab[name=riverside.command_center]").remove();
-			DOM.select("Prefab[name=riverside.library_trashed]").remove();
 			
-			System.out.println("XMLHelper successfully deleted XML nodes, DOM is now: \n" + DOM.toString());
+			getNodeRemoveAndConfirm(DOM, "//*[@Name='search_ground27']");
+			getNodeRemoveAndConfirm(DOM, "//Prefab[@Name='warehouse.workshop']/Objects/Object[@Name='folding_chair26']");
+			getNodeRemoveAndConfirm(DOM, "//Prefab[@Name='riverside.command_center']");
+			getNodeRemoveAndConfirm(DOM, "//Prefab[@Name='riverside.library_trashed']");
+			getNodeRemoveAndConfirm(DOM, "//*[@mod_name='Fortitude_Mod']");
+			
+			System.out.println("XMLHelper successfully deleted XML nodes, DOM is now: \n" + DOM.asXML());
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed to remove elements from XML, error was: \n" + e.getMessage());

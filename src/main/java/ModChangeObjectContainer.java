@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jsoup.nodes.Element;
+import org.dom4j.Element;
+import org.dom4j.Node;
 
 /**
  * Objective: <br>
@@ -26,16 +27,16 @@ public class ModChangeObjectContainer {
 	
 	List<Element> childElements = new ArrayList<>();
 	
-	public ModChangeObjectContainer (String modName, String modAuthor, String fileToMod, Element containerElement) {
+	@SuppressWarnings("unchecked")
+	public ModChangeObjectContainer (String modName, String modAuthor, String fileToMod, Node containerElement) {
 		this.modName = modName;
 		this.modAuthor = modAuthor;
 		this.fileToMod = fileToMod;
-		this.name = containerElement.attr("name");
-		this.modSegment = containerElement.attr("mod_segment");
-		this.parentTag = containerElement.attr("parent_tag");
-		this.parentName = containerElement.attr("parent_name");
-		
-		this.childElements = containerElement.children();
+		this.name = containerElement.valueOf("@name");
+		this.modSegment = containerElement.valueOf("@mod_segment");
+		this.parentTag = containerElement.valueOf("@parent_tag");
+		this.parentName = containerElement.valueOf("@parent_name");
+		this.childElements = containerElement.selectNodes("//Object");
 	}
 	
 	public String getModName() {

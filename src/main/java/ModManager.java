@@ -4,7 +4,8 @@ public class ModManager {
 	
 	public static void main (String[] args) {
 		try {
-			modXMLHelper.handleAllMods();
+			modXMLHelper.findAllXmlModFilesAndBuildThem();
+			modXMLHelper.handleAllMods(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.Node;
 
 /**
  * Objective: <br>
@@ -30,8 +31,8 @@ public class ModXML {
 	 */
 	public ModXML (Document modDom) {
 		this.modXmlFileDOM = modDom;
-		this.modName = modDom.select("ModData").attr("mod_name");
-		this.modAuthor = modDom.select("ModData").attr("mod_author");
+		this.modName = modDom.selectSingleNode("ModData").valueOf("@mod_name");
+		this.modAuthor = modDom.selectSingleNode("ModData").valueOf("@mod_author");
 		setModObjects();
 	}
 	
@@ -53,16 +54,22 @@ public class ModXML {
 	 * Create mission-related objects and add them to our list of all objects
 	 */
 	private void setModMissionObjects () {
-		for (Element objectsChild : this.modXmlFileDOM.getElementsByTag("MissionData").select("Objects")) {
+		@SuppressWarnings("unchecked")
+		List<Element> missionElements = this.modXmlFileDOM.selectNodes("//ModData/MissionData/Objects");
+		
+		for (Node objectsChild : missionElements) {
 			modObjects.add(new ModChangeObjectContainer(this.modName, this.modAuthor, "MissionData", objectsChild));
 		}
+		
 	}
 	
 	/**
 	 * Create mission-related objects and add them to our list of all objects
 	 */
 	private void setModFacilityObjects () {
-		for (Element objectsChild : this.modXmlFileDOM.getElementsByTag("FacilitiesData").select("Objects")) {
+		@SuppressWarnings("unchecked")
+		List<Element> facilitiesElements = this.modXmlFileDOM.selectNodes("//ModData/FacilitiesData/Objects");
+		for (Node objectsChild : facilitiesElements) {
 			modObjects.add(new ModChangeObjectContainer(this.modName, this.modAuthor, "FacilitiesData", objectsChild));
 		}
 	}

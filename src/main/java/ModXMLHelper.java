@@ -34,6 +34,8 @@ public class ModXMLHelper {
 	String facilitiesXMLTarget = "Libs/Prefabs/facilities.xml";
 	String originalMissionXMLTarget = "Levels/Class3/mission_mission0.original.xml";
 	String originalFacilitiesXMLTarget = "Libs/Prefabs/facilities.original.xml";
+	File missionFile = new File(missionXMLTarget);
+	File facilitiesFile = new File(facilitiesXMLTarget);
 
 	Document facilitiesXmlFileDOM;
 	Document missionXmlFileDOM;
@@ -151,9 +153,6 @@ public class ModXMLHelper {
 	
 	private void writeDomsToFiles() {
 		try {
-			File missionFile = new File(missionXMLTarget);
-			File facilitiesFile = new File(facilitiesXMLTarget);
-
 			FileUtils.write(missionFile, missionXmlFileDOM.toString(), "UTF-8");
 			System.out.println("[INFO] - Wrote modded Mission_Mission0.xml to: " + missionFile.getPath());
 			
@@ -183,8 +182,22 @@ public class ModXMLHelper {
 	 */
 	public void handleAllMods () throws Exception {
 		findAllXmlModFilesAndBuildThem();
-		setMissionXmlFileDOM(getXmlFileAndBuild(missionXMLTarget));
-		setFacilitiesXmlFileDOM(getXmlFileAndBuild(facilitiesXMLTarget));
+		
+		if (!missionFile.exists()) {
+			setMissionXmlFileDOM(
+					getXmlFileAndBuild(originalMissionXMLTarget));
+		} else {
+			setMissionXmlFileDOM(
+					getXmlFileAndBuild(missionXMLTarget));
+		}
+		
+		if (!facilitiesFile.exists()) {
+			setFacilitiesXmlFileDOM(
+					getXmlFileAndBuild(originalFacilitiesXMLTarget));
+		} else {
+			setFacilitiesXmlFileDOM(
+					getXmlFileAndBuild(facilitiesXMLTarget));
+		}
 
 		for (ModXML modXml : modXMLs) {
 			for (ModChangeObjectContainer container : modXml.getModObjects() ) {

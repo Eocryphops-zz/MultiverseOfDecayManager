@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -127,7 +128,7 @@ public class ModXMLHelper {
 			
 			while (iterator.hasNext()) {
 				String path = iterator.next().getPath();
-				System.out.println("XML Iterator found XML file: " + path);
+				System.out.println("[INFO] - XML Iterator found XML file: " + path);
 				
 				if (!xmlModsExclusions.contains(path)) {
 					modXMLs.add(buildModXMLDOM(path));
@@ -145,6 +146,21 @@ public class ModXMLHelper {
 			String msg = "[ERROR] - Found NO XML Files in XmlMods directory...";
 			System.out.println(msg);
 			Assert.fail(msg);
+		}
+	}
+	
+	private void writeDomsToFiles() {
+		try {
+			File missionFile = new File(missionXMLTarget);
+			File facilitiesFile = new File(facilitiesXMLTarget);
+
+			FileUtils.write(missionFile, missionXmlFileDOM.toString(), "UTF-8");
+			System.out.println("[INFO] - Wrote modded Mission_Mission0.xml to: " + missionFile.getPath());
+			
+			FileUtils.write(facilitiesFile, facilitiesXmlFileDOM.toString(), "UTF-8");
+			System.out.println("[INFO] - Wrote modded Facilities.xml to: " + facilitiesFile.getPath());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -177,6 +193,8 @@ public class ModXMLHelper {
 						+ container.getFileToMod() + "][" + container.getModName() + "][" + container.getModSegment() + "]\n\n");
 			}
 		}
+		
+		writeDomsToFiles();
 		
 		System.out.println("\n\n[INFO] - Finished handling all Mods - Huzzah!");
 	}

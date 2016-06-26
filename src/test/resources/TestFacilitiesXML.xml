@@ -1,0 +1,29 @@
+<PrefabsLibrary Name="Facilities">
+	
+	<!-- Snyder Warehouse Target -->
+	<Prefab Name="warehouse.workshop" Id="{FB1F1C22-0C83-4CAC-8307-F5EFF504BFB6}" Library="Facilities">
+  		<Objects>
+			<Object Type="Brush" Layer="W layer" LayerGUID="{94243B821E98}" Id="{09E4E2F11AAE}" Name="folding_chair26" Pos="2.8345947,-12.219727,0.028869629" FloorNumber="-1" Rotate="-0.2756373,0,0,0.96126169" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/chairs/folding/folding_chair.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="100" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+   			<Object Type="Brush" Layer="W layer" LayerGUID="{94243B821E98}" Id="{13D248114F64}" Name="search_ground27" Pos="-1.5465088,1.5241089,0.040306091" FloorNumber="-1" Rotate="0.88294762,0,0,-0.46947151" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/gameplay/facility_interaction/search_ground/search_ground.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="100" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+		</Objects>
+	</Prefab>
+	
+	<!-- Savini Target -->
+	<Prefab Name="riverside.command_center" Id="{D133ED5C-8FFB-406E-9C56-4B1C1C28D04E}" Library="Facilities">
+		<Objects>
+			<Object Type="Brush" Layer="S layer" LayerGUID="{BDB92179}" Id="{AE6B268C}" Name="folding_chair16" Pos="2.8345947,-12.219727,0.028869629" FloorNumber="-1" Rotate="-0.2756373,0,0,0.96126169" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/chairs/folding/folding_chair.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="100" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+   			<Object Type="Brush" Layer="S layer" LayerGUID="{BDB92179}" Id="{505362B2}" Name="search_ground17" Pos="-1.5465088,1.5241089,0.040306091" FloorNumber="-1" Rotate="0.88294762,0,0,-0.46947151" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/gameplay/facility_interaction/search_ground/search_ground.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="100" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+		</Objects>
+	</Prefab>
+	
+	<!-- Just adding an extra for chaff purposes -->
+	<Prefab Name="riverside.library_trashed" Id="{DCC00D2E-4498-4FFE-83F6-244970B8DAD3}" Library="Facilities">
+	<!-- Apologies to fellow lexophiles for leaving the library elements as they are - 
+		You know it's poorly-written literature if it's only described as a 'self-closing element' ;) -->
+		<Objects>
+			<Object/>
+			<Object/>
+			<Object/>
+		</Objects>
+	</Prefab>
+</PrefabsLibrary>

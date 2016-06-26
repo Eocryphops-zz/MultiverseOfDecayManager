@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModData mod_name="Fortitude_Mod" mod_author="phacops">
+	<FacilitiesData>
+		<Objects name="Snyder_Objects" mod_segment="Snyder Trucking Warehouse" parent_tag="Prefab" parent_name="warehouse.workshop">
+			<Object Type="Brush" Name="Snyder_Fortitude" Pos="2.5,-2.5,0" FloorNumber="-1" Rotate="0.383,0,0,-0.924" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/vehicles/musclecar/musclecar.cga" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+		</Objects>
+		
+		<Objects name="Savini_Objects" mod_segment="Savini/Riverside" parent_tag="Prefab" parent_name="riverside.command_center">
+			<Object Type="Brush" Name="Savini_Fortitude" Pos="2.5,-2.5,0" FloorNumber="-1" Rotate="0.383,0,0,-0.924" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/vehicles/musclecar/musclecar.cga" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+		</Objects>
+	</FacilitiesData>
+	
+	
+	<MissionData>
+		<Objects name="Savini_Entities" mod_segment="Savini/Riverside" parent_tag="Objects">
+			<Object Name="SaviniEntity" Pos="1501.3844,800.42261,101.17547" EntityClass="SurveyPoint" EntityId="4370" EntityGuid="403D4E79B3B28330"/>
+		</Objects>
+	</MissionData>
+</ModData>

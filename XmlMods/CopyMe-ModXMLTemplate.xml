@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Your mod details to uniquely identify you - mod_name eould preferably be unique, and reasonably short, which should hold true for your name - perhaps your online alias-->
+<ModData mod_name="NAME_OF_MOD" mod_author="AUTHOR_OF_MOD">
+
+	<!-- Anything that needs to be added to the Facilities.xml needs a sub-object placed here -->
+	<FacilitiesData>
+	
+	<!-- Segment name just identifies this subsection of the mod, such as a single home base getting some additions, 
+	while another homebase would have the additions added in another object.
+	
+	To have multiple objects, it operates like any normal XML file, 
+	where you just add another instance of 'Objects' into the proper container with the requested metadata -->
+		<Objects name="LOCATION_Objects" mod_segment="SEGMENT_NAME" parent_tag="ELEMENT_TYPE_TO_ADD_THIS_TO" parent_name="ELEMENT_NAME_TO_ADD_THIS_TO">
+			<Object Type="Brush" Name="UNIQUE_NAME" />
+		</Objects>
+		
+		<!-- Example -->
+		<Objects name="Savini_Objects" mod_segment="Savini/Riverside" parent_tag="Prefab" parent_name="riverside.command_center">
+			<Object Type="Brush" Name="Savini_Fortitude" Pos="2.5,-2.5,0" FloorNumber="-1" Rotate="0.383,0,0,-0.924" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/vehicles/musclecar/musclecar.cga" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+		</Objects>
+	</FacilitiesData>
+	
+	
+	<!-- Anything that needs to be added to the Mission_Mission0.xml needs a sub-object placed here.
+	Note that the only time this should happen is things like Entities, or Time of Day changes (a feature which is uncommon so I'll handle that later)-->
+	<MissionData>
+		<Objects name="NAME_Entities" mod_segment="SEGMENT_NAME" parent_tag="Objects">
+			<Object Name="UNIQUE_NAME"/>
+		</Objects>
+		
+		<!-- Example
+			Note: Mission_Mission0.xml items can be of many element types - only the <Objects> containers are relevant to the template -->
+		<Objects name="Savini_Entities" mod_segment="Savini/Riverside" parent_tag="Objects">
+		<!-- Don't try to use this in a real mod - I chopped it up so it was a clearer example ;) -->
+			<Entity Name="SaviniEntity" Pos="1501.3844,800.42261,101.17547" EntityClass="SurveyPoint" EntityId="4370" EntityGuid="403D4E79B3B28330"/>
+		</Objects>
+	</MissionData>
+</ModData>

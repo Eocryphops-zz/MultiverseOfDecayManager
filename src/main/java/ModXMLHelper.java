@@ -226,7 +226,6 @@ public class ModXMLHelper {
 	 * @param modChangeRequestContainer
 	 */
 	public void handleChangesForMod (ModChangeObjectContainer modChangeRequestContainer) {
-		
 		Element parentToMod = getExpectedParentElement(modChangeRequestContainer);
 		parentToMod = removeModElementsIfPresent(modChangeRequestContainer.getModName(), parentToMod);
 		parentToMod = addModElements(modChangeRequestContainer, parentToMod);
@@ -255,7 +254,7 @@ public class ModXMLHelper {
 
 		@SuppressWarnings("unchecked")
 		List<Element> domParentElement = (!StringUtils.isBlank(parentName)) 
-				? domToAddTo.selectNodes("//" + parentTag + "[@Name='" + parentName + "']") : domToAddTo.selectNodes("//" + parentTag);
+				? domToAddTo.selectNodes("//" + parentTag + "[@Name='" + parentName + "']/Objects") : domToAddTo.selectNodes("//" + parentTag);
 
 				if (domParentElement.size() > 1) {
 					// In theory this shouldn't happen...but the element quantity is reasonably enormous so I'll assume my sample may be faulty
@@ -330,22 +329,15 @@ public class ModXMLHelper {
 		+ "\" mod_segment=\"" + modContainerElement.getName() 
 		+ "\" ";
 
-		Element startWrapper = parentToAddTo.addElement(modWrapperBuilder + "placement=\"end_tag\" ");
-		if (debug) {
-			System.out.println("Adding new Element: " + startWrapper.asXML());
-		}
-
+		parentToAddTo.addElement(modWrapperBuilder + "placement=\"start_tag\" />");
+		
 		for (Element element : modChildObjectsToAdd) {
 			element.addAttribute("mod_name", modName);
 			
 			parentToAddTo.addElement(element.asXML().replaceAll("^<(.*)/>$", "$1"));
 		}
 
-		parentToAddTo.addElement(modWrapperBuilder + "placement=\"start_tag\" />");
-		
-		if (debug) {
-			System.out.println(parentToAddTo.selectSingleNode("//ModWrapper"));
-		}
+		parentToAddTo.addElement(modWrapperBuilder + "placement=\"end_tag\" ");
 
 		return parentToAddTo;
 	}

@@ -77,6 +77,7 @@ public class ModChangeObjectContainer {
 		return this.modSegment + "\n"
 				+ "name: " + this.name + "\n"
 				+ "modSegment: " + this.modSegment + "\n"
+				+ "fileToMod: " + this.fileToMod + "\n"
 				+ "parentTag: " + this.parentTag + "\n"
 				+ "parentName: " + this.parentName + "\n"
 				+ "childElements: " + this.childElements.toString() + "\n\n";

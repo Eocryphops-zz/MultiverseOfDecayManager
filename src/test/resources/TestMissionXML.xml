@@ -1,0 +1,32 @@
+	<Mission>
+	<Objects>
+	  <Object Type="Decal" Name="Decal1810" Material="Materials/decals/blood_splat5" Pos="1805.8593,1361.6287,94.004082" Rotate="0.95569032,0,0,-0.29437405" Scale="2.22,2.22,2.22" ProjectionType="2" Deferred="1" ViewDistRatio="100" SortPriority="16" ProjectionDepth="0.1" SingleSided="0"/>
+	  <Entity Name="aud_rvrb_resi_med" Pos="1487.2882,620.58478,125.75557" EntityClass="ReverbVolume" EntityId="3666" EntityGuid="4B886ED231CCA7FF" Layer="audio">
+	   <Properties bEnabled="1" Environment="1" bFullEffectWhenInside="0" OuterRadius="0.5" reverbpresetReverbPreset="Room_Medium"/>
+	  </Entity>
+	  <Object Type="Decal" Name="Decal2084" Material="Materials/decals/fuel_puddle" Pos="1816.9233,1366.2416,96.765404" Rotate="0.92103153,0.03002499,0.072486781,-0.3815037" Scale="2,2,2" ProjectionType="1" Deferred="0" ViewDistRatio="100" SortPriority="16" ProjectionDepth="1" SingleSided="1"/>
+	  <Object Type="Decal" Name="Decal604" Material="Materials/decals/dirt_bright_1" Pos="2494.5618,1933.9069,131.76927" Rotate="-0.26488674,0.62433821,0.33196646,0.65561801" Scale="2.9800003,2.98,2.9799995" ProjectionType="1" Deferred="1" ViewDistRatio="100" SortPriority="16" ProjectionDepth="0.01" SingleSided="0"/>
+	  <Entity Name="pt_Nav_14_11_BA" Pos="2465.1636,1820.0046,126.27529" Rotate="0.9238795,0,0,0.38268346" EntityClass="TagPoint" EntityId="2510" EntityGuid="48CFEC3E05DACDFF" Layer="RTS">
+	   <EntityLinks>
+	    <Link TargetId="1737" Name="Major" RelRot="1,0,0,0" RelPos="0,0,0"/>
+	    <Link TargetId="1473" Name="NewLink" RelRot="1,0,0,0" RelPos="0,0,0"/>
+	   </EntityLinks>
+	  </Entity>
+	  <Entity Name="RoadSign3" Pos="1805.363,684.71204,88.566879" Rotate="-4.3711388e-008,0,0,1" EntityClass="RoadSign" EntityId="9003" EntityGuid="4B5EAF95BB53E2FF" LodRatio="200" ViewDistRatio="200" CreatedThroughPool="1" Layer="12-DR">
+	   <Properties BreakEffects="Class3Breakables.misc_objects.mailbox_single_metalpost" fDamageThreshold="0" fHealth="1" object_Model="objects/decor/infrastructure/mailboxes/mailbox_simple_pole_breakable/mailbox_simple_pole_breakable.cgf">
+	    <Breakage fExplodeImpulse="0" bFreeSlot="1" fLifeTime="10" bSurfaceEffects="1"/>
+	    <Physics bActivateOnDamage="1" bCanBreakOthers="0" Density="-1" Mass="-1" bPushableByPlayers="0" bResting="1" bRigidBody="1" bRigidBodyActive="0" bRigidBodyAfterDeath="1">
+	     <Simulation damping="0" max_time_step="0.02" sleep_speed="0.04"/>
+	    </Physics>
+	    <Physics_Ground bActivateOnDamage="0" bCanBreakOthers="0" Density="-1" Mass="-1" bPhysicalize="1" bPushableByPlayers="0" bResting="1" bRigidBody="0" bRigidBodyActive="1" bRigidBodyAfterDeath="0">
+	     <Simulation damping="0" max_time_step="0.02" sleep_speed="0.04"/>
+	    </Physics_Ground>
+	    <Vulnerability bBullet="1" bCollision="1" fDamageThreshold="0" bExplosion="1" bMelee="1" bOther="1"/>
+	   </Properties>
+	  </Entity>
+	  <Object Type="Decal" Name="Decal2092" Material="Materials/decals/fuel_puddle" Pos="1795.9331,1362.3334,97.638939" Rotate="-0.16743493,-0.29678741,0.62687367,0.70065123" Scale="1.6,1.6,1.6" ProjectionType="1" Deferred="0" ViewDistRatio="100" SortPriority="16" ProjectionDepth="1" SingleSided="1"/>
+	  <Object Type="Decal" Name="Decal674" Material="Materials/decals/blood_splats/blood_splat1" Pos="3259.4807,3434.9067,216.92015" Rotate="0.13052623,-5.1216084e-008,6.7427228e-009,0.99144489" Scale="1.48,1.48,1.48" ProjectionType="1" Deferred="1" ViewDistRatio="100" SortPriority="16" ProjectionDepth="0.05" SingleSided="0"/>
+	  <Object Type="Decal" Name="Decal1014" Material="Materials/decals/blood_splat2" Pos="2683.4055,1689.6602,128.31657" Rotate="0.88196236,0,0,-0.47131982" Scale="1.39,1.39,1.39" ProjectionType="2" Deferred="0" ViewDistRatio="100" SortPriority="16" ProjectionDepth="0.1" SingleSided="0"/>
+	</Objects>
+	<modwrapper mod_name="Fortitude_Mod" mod_author="phacops" mod_segment="Savini_Entities" placement="start_tag" />
+</Mission>

@@ -7,10 +7,11 @@ import org.jsoup.select.Elements;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class XMLTest {
+public class TestManagerXmlFileHandling {
 	ModXMLHelper modXMLHelper = new ModXMLHelper();
 	String modTestXMLFileTarget = "src/test/resources/FortitudeModTestXML.xml";
-	String insertionTestXMLFileTarget = "src/test/resources/TestFacilitiesXML.xml";
+	String facilitiesTestXMLFileTarget = "src/test/resources/TestFacilitiesXML.xml";
+	String missionTestXMLFileTarget = "src/test/resources/TestMissionXML.xml";
 	
 	@Test (description = "Test that we can access the XML resource, and are able to open it")
 	public void testOpen () {
@@ -48,60 +49,6 @@ public class XMLTest {
 		}
 	}
 	
-	@Test (description = "Test XML element insertion - "
-			+ "explicitly grabbing only one unit of start/end tags and the core content and inserting")
-	public void testInsertFewElementsIntoXMLDOM () {
-		try {
-			Document DOM = modXMLHelper.getXmlFileAndBuild(modTestXMLFileTarget);
-			Document insertionDOM = modXMLHelper.getXmlFileAndBuild(insertionTestXMLFileTarget);
-			
-			List<Element> modElements = new ArrayList<Element>();
-			
-			Element firstFacilitiesData = DOM.select("FacilitiesData").first();
-			String modName = firstFacilitiesData.attr("name");
-			
-			Element fortitudeSnyderFacilitiesData = firstFacilitiesData.select("Objects").first();
-			
-			modElements.add(fortitudeSnyderFacilitiesData.select("ModWrapper[placement=start_tag]").first());
-			modElements.addAll(fortitudeSnyderFacilitiesData.select("Object[mod_name=" + modName + "]"));
-			modElements.add(fortitudeSnyderFacilitiesData.select("ModWrapper[placement=end_tag]").first());
-			
-			Elements originalSnyderElement = insertionDOM.select(
-					fortitudeSnyderFacilitiesData.attr("parent_tag") 
-					+ "[name=" + fortitudeSnyderFacilitiesData.attr("parent_name") + "]");
-			
-			originalSnyderElement.select("[mod_name=" + modName + "]").remove();
-			
-			Elements originalSnyderElementObjects = originalSnyderElement.select("Objects");
-			
-			for (Element element : modElements) {
-				originalSnyderElementObjects.prepend(element.toString());
-			}
-			
-			for (Element element : modElements) {
-				Elements newElement;
-				
-				// The system automatically converts to lowercase
-				if (!element.tagName().equals("modwrapper")) {
-					newElement = originalSnyderElementObjects.select("[Name=" + element.attr("Name") + "]");
-				} else {
-					newElement = originalSnyderElementObjects.select("[mod_name=" + modName + "]");
-				}
-				
-				if (newElement.isEmpty()) {
-					Assert.fail("XMLHelper seemed to successfully insert XML nodes, but was unable to confirm, "
-							+ "DOM is now: \n" + insertionDOM.toString());
-				}
-			}
-			
-			System.out.println("XMLHelper successfully inserted XML nodes, "
-					+ "SnyderObjects are now: \n" + originalSnyderElementObjects.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail("Failed to insert elements into XML, error was: \n" + e.getMessage());
-		}
-	}
-	
 	@Test (description = "Test XML element insertion")
 	public void testInsertElementsIntoXMLDOM () {
 		try {
@@ -109,8 +56,8 @@ public class XMLTest {
 			modList.add(new ModXML(modXMLHelper.getXmlFileAndBuild(modTestXMLFileTarget)));
 			
 			modXMLHelper.setModXMLs(modList);
-			modXMLHelper.setFacilitiesXMLTarget(insertionTestXMLFileTarget);
-			modXMLHelper.setMissionXMLTarget(insertionTestXMLFileTarget);
+			modXMLHelper.setFacilitiesXMLTarget(facilitiesTestXMLFileTarget);
+			modXMLHelper.setMissionXMLTarget(missionTestXMLFileTarget);
 			
 			modXMLHelper.handleAllMods();
 		} catch (Exception e) {
@@ -122,7 +69,7 @@ public class XMLTest {
 	@Test (description = "Test XML element removal")
 	public void testRemoveElementsFromXMLDOM () {
 		try {
-			Document DOM = modXMLHelper.getXmlFileAndBuild(insertionTestXMLFileTarget);
+			Document DOM = modXMLHelper.getXmlFileAndBuild(facilitiesTestXMLFileTarget);
 			DOM.select("Prefab[name=warehouse.workshop] Objects Object[Name=folding_chair26]").remove();
 			DOM.select("Prefab[name=riverside.command_center]").remove();
 			DOM.select("Prefab[name=riverside.library_trashed]").remove();

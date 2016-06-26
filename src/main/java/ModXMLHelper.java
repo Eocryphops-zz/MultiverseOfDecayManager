@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,7 +13,7 @@ import org.jsoup.select.Elements;
 
 public class ModXMLHelper {
 
-	String xmlModsFolder = "/XmlMods";
+	String xmlModsFolder = "XmlMods";
 
 	// Until I have a fuller UI, this will service skipping mods - woe be to those with a fear of manual labor :)
 	String xmlModsExclusionsFile = "/XmlMods/exclusions.txt";
@@ -42,6 +43,22 @@ public class ModXMLHelper {
 		this.facilitiesXMLTarget = facilitiesTarget;
 	}
 	
+	public Document getFacilitiesXmlFileDOM() {
+		return facilitiesXmlFileDOM;
+	}
+
+	public void setFacilitiesXmlFileDOM(Document facilitiesXmlFileDOM) {
+		this.facilitiesXmlFileDOM = facilitiesXmlFileDOM;
+	}
+
+	public Document getMissionXmlFileDOM() {
+		return missionXmlFileDOM;
+	}
+
+	public void setMissionXmlFileDOM(Document missionXmlFileDOM) {
+		this.missionXmlFileDOM = missionXmlFileDOM;
+	}
+
 	/**
 	 * @param pageSource
 	 * @return
@@ -89,7 +106,7 @@ public class ModXMLHelper {
 
 	public void findAllXmlModFilesAndBuildThem () throws Exception {
 
-		Iterator<File> iterator = FileUtils.iterateFiles(FileUtils.getFile(xmlModsFolder), new String[]{".xml"}, false);
+		Iterator<File> iterator = FileUtils.iterateFiles(new File(xmlModsFolder), new String[]{".xml"}, false);
 		while (iterator.hasNext()) {
 			modXMLs.add(buildModXMLDOM(iterator.next().getPath()));
 		}
@@ -100,7 +117,11 @@ public class ModXMLHelper {
 		return new ModXML(getXmlFileAndBuild(modFileTarget));
 	}
 
-	public void handleAllMods () {
+	public void handleAllMods () throws Exception {
+		findAllXmlModFilesAndBuildThem();
+		setMissionXmlFileDOM(getXmlFileAndBuild(missionXMLTarget));
+		setFacilitiesXmlFileDOM(getXmlFileAndBuild(facilitiesXMLTarget));
+		
 		for (ModXML modXml : modXMLs) {
 			for (ModChangeObjectContainer container : modXml.getModObjects() ) {
 				handleChangesForMod(container);
@@ -128,10 +149,15 @@ public class ModXMLHelper {
 	 */
 	public Element getExpectedParentElement(ModChangeObjectContainer modContainerElement) {
 
-		Document domToAddTo = (modContainerElement.getTagName()
+		Document domToAddTo = (modContainerElement.getFileToMod()
 				.equals("FacilitiesData")) ? facilitiesXmlFileDOM : missionXmlFileDOM;
-		Elements domParentElement = domToAddTo.select(modContainerElement.getParentTag()
-				+ "[name=" + modContainerElement.getParentName() + "]");
+		
+		String parentTag = modContainerElement.getParentTag();
+		String parentName = modContainerElement.getParentName();
+		
+		
+		Elements domParentElement = (!StringUtils.isBlank(parentName)) 
+				? domToAddTo.select(parentTag + "[name=" + parentName + "]") : domToAddTo.select(parentTag);
 
 		if (domParentElement.size() > 1) {
 			// In theory this shouldn't happen...but the element quantity is reasonably enormous so I'll assume my sample may be faulty
@@ -141,13 +167,22 @@ public class ModXMLHelper {
 					+ "and assure that the name is a unique key");
 		}
 
+		if (domParentElement == null || domParentElement.isEmpty()) {
+			throw new NullPointerException("Could not find domParentElement for: \n" 
+		+ modContainerElement + "\nIn DOM: \n" + domToAddTo);
+			}
 		// Relies on the assumption we only get one - merely allowing us to circumvent wielding an array
 		return domParentElement.first();
 	}
 	
 	public Element removeModElementsIfPresent (String modName, Element parentToRemoveFrom) {
 		
-		parentToRemoveFrom.select("[mod_name=" + modName + "]").remove();
+		Elements potentialOldElements = parentToRemoveFrom.select("[mod_name=" + modName + "]").remove();
+		
+		if (potentialOldElements != null & !potentialOldElements.isEmpty()) {
+			parentToRemoveFrom.select("[mod_name=" + modName + "]").remove();
+		}
+		
 		return parentToRemoveFrom;
 	}
 	
@@ -163,17 +198,21 @@ public class ModXMLHelper {
 		+ "\" mod_segment=\"" + modContainerElement.getName() 
 		+ "\" ";
 		
-		Document modWrapper = new Document(
-			modWrapperBuilder + "placement=\"start_tag\" />" 
-			+ modWrapperBuilder + "placement=\"end_tag\" />");
+		// FILO, DOM prepend (FILO DOM, Filo Dough: Very similar, yes?)
+		Document modWrapper = Jsoup.parse(
+			modWrapperBuilder + "placement=\"end_tag\" />" 
+			+ modWrapperBuilder + "placement=\"start_tag\" />");
 		
 		parentToAddTo.prepend(modWrapper.select("ModWrapper").first().toString());
 		
 		for (Element element : modContainerElement.getChildElements()) {
+			element.attr("mod_name", modContainerElement.getModName());
 			parentToAddTo.prepend(element.toString());
 		}
 		
 		parentToAddTo.prepend(modWrapper.select("ModWrapper").last().toString());
+		
+		System.out.println(parentToAddTo.toString());
 		
 		return parentToAddTo;
 	}

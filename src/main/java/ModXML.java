@@ -33,13 +33,13 @@ public class ModXML {
 	
 	public void setModMissionObjects () {
 		for (Element objectsChild : this.modXmlFileDOM.getElementsByTag("MissionData").select("Objects")) {
-			modObjects.add(new ModChangeObjectContainer(this.modName, this.modAuthor, objectsChild));
+			modObjects.add(new ModChangeObjectContainer(this.modName, this.modAuthor, "MissionData", objectsChild));
 		}
 	}
 	
 	public void setModFacilityObjects () {
 		for (Element objectsChild : this.modXmlFileDOM.getElementsByTag("FacilitiesData").select("Objects")) {
-			modObjects.add(new ModChangeObjectContainer(this.modName, this.modAuthor, objectsChild));
+			modObjects.add(new ModChangeObjectContainer(this.modName, this.modAuthor, "FacilitiesData", objectsChild));
 		}
 	}
 	

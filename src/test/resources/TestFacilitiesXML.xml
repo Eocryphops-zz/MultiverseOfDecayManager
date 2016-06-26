@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
 <PrefabsLibrary Name="Facilities">
 	
 	<!-- Snyder Warehouse Target -->
@@ -7,7 +9,7 @@
    			<Object Type="Brush" Layer="W layer" LayerGUID="{94243B821E98}" Id="{13D248114F64}" Name="search_ground27" Pos="-1.5465088,1.5241089,0.040306091" FloorNumber="-1" Rotate="0.88294762,0,0,-0.46947151" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/gameplay/facility_interaction/search_ground/search_ground.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="100" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
 			
 			<!-- Confirm that this gets deleted based on mod-name, regardless of position in object -->
-			<modwrapper mod_name="Fortitude_Mod" placement="start_tag" />
+			<ModWrapper mod_name="Fortitude_Mod" placement="start_tag" />
 		</Objects>
 	</Prefab>
 	

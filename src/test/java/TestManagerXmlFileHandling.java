@@ -2,11 +2,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Objective: <br>
+ * Simple tester for some of the general mechanics.<br>
+ * <br>
+ * Note:<br>
+ * Is not a comprehensive unit tester, but does just enough to Red-Green through.<br>
+ * Further utility will arise when a UI is implemented.<br>
+ * @author Phacops
+ */
 public class TestManagerXmlFileHandling {
 	ModXMLHelper modXMLHelper = new ModXMLHelper();
 	String modTestXMLFileTarget = "src/test/resources/FortitudeModTestXML.xml";
@@ -78,51 +85,6 @@ public class TestManagerXmlFileHandling {
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed to remove elements from XML, error was: \n" + e.getMessage());
-		}
-	}
-	
-//////////////////////////////////////////////////////
-// TODO - implement sorters
-//////////////////////////////////////////////////////
-
-	@Test (description = "Test that we are correctly able to parse an XML file for a vector-space point, "
-			+ "in order to allow referential ordering ", enabled=false)
-	public void testGetVectorElement () {
-		try {
-			Document DOM = modXMLHelper.getXmlFileAndBuild(modTestXMLFileTarget);
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail("Failed to get VectorElement from DOM, error was: \n" + e.getMessage());
-		}
-	}
-	
-	@Test (description = "Test sorting vector positions by the X axis", enabled=false)
-	public void testSortThreeElementsByVectorXPosition () {
-		try {
-			Document DOM = modXMLHelper.getXmlFileAndBuild(modTestXMLFileTarget);
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail("Failed to sort VectorElements from DOM, error was: \n" + e.getMessage());
-		}
-	}
-	
-	@Test (description = "Test sorting vector positions by the Y axis", enabled=false)
-	public void testSortThreeElementsByVectorYPosition () {
-		try {
-			Document DOM = modXMLHelper.getXmlFileAndBuild(modTestXMLFileTarget);
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail("Failed to sort VectorElements from DOM, error was: \n" + e.getMessage());
-		}
-	}
-	
-	@Test (description = "Test sorting vector positions by the Z axis", enabled=false)
-	public void testSortThreeElementsByVectorZPosition () {
-		try {
-			Document DOM = modXMLHelper.getXmlFileAndBuild(modTestXMLFileTarget);
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail("Failed to sort VectorElements from DOM, error was: \n" + e.getMessage());
 		}
 	}
 }

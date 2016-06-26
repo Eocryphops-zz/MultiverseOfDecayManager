@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
 <ModData mod_name="Fortitude_Mod" mod_author="phacops">
 	<FacilitiesData>
 		<Objects name="Snyder_Objects" mod_segment="Snyder Trucking Warehouse" parent_tag="Prefab" parent_name="warehouse.workshop">

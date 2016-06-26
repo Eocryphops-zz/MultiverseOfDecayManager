@@ -1,4 +1,6 @@
-	<Mission>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Mission>
 	<Objects>
 	  <Object Type="Decal" Name="Decal1810" Material="Materials/decals/blood_splat5" Pos="1805.8593,1361.6287,94.004082" Rotate="0.95569032,0,0,-0.29437405" Scale="2.22,2.22,2.22" ProjectionType="2" Deferred="1" ViewDistRatio="100" SortPriority="16" ProjectionDepth="0.1" SingleSided="0"/>
 	  <Entity Name="aud_rvrb_resi_med" Pos="1487.2882,620.58478,125.75557" EntityClass="ReverbVolume" EntityId="3666" EntityGuid="4B886ED231CCA7FF" Layer="audio">
@@ -28,5 +30,5 @@
 	  <Object Type="Decal" Name="Decal674" Material="Materials/decals/blood_splats/blood_splat1" Pos="3259.4807,3434.9067,216.92015" Rotate="0.13052623,-5.1216084e-008,6.7427228e-009,0.99144489" Scale="1.48,1.48,1.48" ProjectionType="1" Deferred="1" ViewDistRatio="100" SortPriority="16" ProjectionDepth="0.05" SingleSided="0"/>
 	  <Object Type="Decal" Name="Decal1014" Material="Materials/decals/blood_splat2" Pos="2683.4055,1689.6602,128.31657" Rotate="0.88196236,0,0,-0.47131982" Scale="1.39,1.39,1.39" ProjectionType="2" Deferred="0" ViewDistRatio="100" SortPriority="16" ProjectionDepth="0.1" SingleSided="0"/>
 	</Objects>
-	<modwrapper mod_name="Fortitude_Mod" mod_author="phacops" mod_segment="Savini_Entities" placement="start_tag" />
+	<ModWrapper mod_name="Fortitude_Mod" mod_author="phacops" mod_segment="Savini_Entities" placement="start_tag" />
 </Mission>

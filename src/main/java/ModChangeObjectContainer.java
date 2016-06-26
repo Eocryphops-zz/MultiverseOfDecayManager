@@ -3,6 +3,18 @@ import java.util.List;
 
 import org.jsoup.nodes.Element;
 
+/**
+ * Objective: <br>
+ * Provide a simple container to assign attributes and methods to that represents each segment of a mod. <br>
+ *  <br>
+ * Analysis:  <br>
+ * Contains metadata for the overall mod, specifically the mod name and the author, 
+ * so that it can apply this to wrappers and the physical elements, so that modders don't have to. <br>
+ * <br>
+ * Simple application is ease of querying the requested details and minimizing workload for larger mods.<br>
+ * <br>
+ * @author Phacops
+ */
 public class ModChangeObjectContainer {
 	String modName;
 	String modAuthor;

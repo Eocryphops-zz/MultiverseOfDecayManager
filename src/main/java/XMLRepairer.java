@@ -34,12 +34,16 @@ import org.xml.sax.InputSource;
  */
 public class XMLRepairer {
 
+	/**
+	 * Specifically repairs the issue presented with the Dom4j mechanics of new elements 
+	 * not having an extremely simple method of adding new elements. When you add an element, 
+	 * it seems to generate it as though it's a new self-closing element, which wraps the passed HTML, 
+	 * thus it needs pruning - enter this method.
+	 * 
+	 * @param fileDataTorepair
+	 * @return
+	 */
 	public static String repair (String fileDataTorepair) {
-		
-		// Build a map of the elements and attributes that we need to fix
-		// Create a method to parse the existing DOM as a string and return a repaired string of XML
-		// Can we delete the layer/id/guid data since it's for the Dev Engine and not the Game Engine? - would be easier to manage the file
-		
 		String replaceDoubleStart = fileDataTorepair.replaceAll("<<", "<");
 		String replaceDoubleSelfEnd = replaceDoubleStart.replaceAll("/>/>", "/>");
 		String replaceDoubleEnd = replaceDoubleSelfEnd.replaceAll("(\\s?\\w?)>/>", "$1>");

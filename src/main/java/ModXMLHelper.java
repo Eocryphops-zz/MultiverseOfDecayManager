@@ -33,8 +33,8 @@ public class ModXMLHelper {
 	String xmlModsExclusionsFileTarget = "XmlMods/XmlFilesToExcludeFromBuilding.txt";
 	String missionXMLTarget = "Levels/Class3/mission_mission0.xml";
 	String facilitiesXMLTarget = "Libs/Prefabs/facilities.xml";
-	String originalMissionXMLTarget = "Levels/Class3/mission_mission0.original.xml";
-	String originalFacilitiesXMLTarget = "Libs/Prefabs/facilities.original.xml";
+	String originalMissionXMLTarget = "XmlMods/Backup/mission_mission0.original.xml";
+	String originalFacilitiesXMLTarget = "XmlMods/Backup/facilities.original.xml";
 	File missionFile;
 	File facilitiesFile;
 

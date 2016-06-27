@@ -179,6 +179,16 @@ public class ModXMLHelper {
 	public void handleAllMods (boolean debug) throws Exception {
 		this.debug = debug;
 		
+		System.out.println("[INFO] - ModXMLHelper found [" + modXMLs.size() + "] Mods!");
+		
+		buildXMLFiles();
+		handleModXMLFiles();
+		writeDomsToFiles();
+		
+		System.out.println("\n\n[INFO] - Finished handling all Mods - Huzzah!");
+	}
+	
+	public void buildXMLFiles () throws Exception {
 		missionFile = new File(missionXMLTarget);
 		facilitiesFile = new File(facilitiesXMLTarget);
 		
@@ -197,9 +207,9 @@ public class ModXMLHelper {
 			setFacilitiesXmlFileDOM(
 					getXmlFileAndBuild(facilitiesXMLTarget));
 		}
-
-		System.out.println("[INFO] - ModXMLHelper found [" + modXMLs.size() + "] Mods!");
-		
+	}
+	
+	public void handleModXMLFiles () {
 		for (ModXML modXml : modXMLs) {
 			List<ModChangeObjectContainer> modObjects = modXml.getModObjects();
 			
@@ -214,10 +224,6 @@ public class ModXMLHelper {
 						+ container.getFileToMod() + "][" + container.getModName() + "][" + container.getModSegment() + "]\n\n");
 			}
 		}
-		
-		writeDomsToFiles();
-		
-		System.out.println("\n\n[INFO] - Finished handling all Mods - Huzzah!");
 	}
 
 	/**
@@ -310,13 +316,14 @@ public class ModXMLHelper {
 	 */
 	public Element addModElements (ModChangeObjectContainer modContainerElement, Element parentToAddTo) {
 
+		System.out.println("[INFO] - Adding Elements to " + parentToAddTo.getPath() + " for: \n" + modContainerElement.toString());
+		
 		String modName = modContainerElement.getModName();
 		List<Element> modChildObjectsToAdd = modContainerElement.getChildElements();
 		
 		if (debug) {
-			System.out.println("\n[INFO] - modChildObjectsToAdd contained "
-					+ "[" + modChildObjectsToAdd.size() + "] requests, they were: "
-							+ "\n" + modChildObjectsToAdd.toString() + "\n\n");
+			System.out.println("[INFO] - modChildObjectsToAdd contained "
+					+ "[" + modChildObjectsToAdd.size() + "]\n\n");
 		}
 		
 		/* 

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dom4j.Document;
+import org.dom4j.Element;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -59,7 +60,46 @@ public class TestManagerXmlFileHandling {
 		}
 	}
 	
+	@Test (description = "Test XML element insertion")
+	public void testModXMLHandling () {
+		try {
+			List<ModXML> modList = new ArrayList<ModXML>();
+			modList.add(new ModXML(modXMLHelper.getXmlFileAndBuild(modTestXMLFileTarget)));
+			
+			modXMLHelper.setModXMLs(modList);
+			modXMLHelper.setFacilitiesXMLTarget(facilitiesTestXMLFileTarget);
+			modXMLHelper.setMissionXMLTarget(missionTestXMLFileTarget);
+			modXMLHelper.buildXMLFiles();
+			modXMLHelper.handleModXMLFiles();
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Failed to insert elements into XML, error was: \n" + e.getMessage());
+		}
+	}
 	
+	@Test (description = "Test XML element insertion")
+	public void testBuildContainer () {
+		try {
+			ModXML mod = new ModXML(modXMLHelper.getXmlFileAndBuild(modTestXMLFileTarget));
+			List<ModChangeObjectContainer> modObjects = mod.getModObjects();
+			
+			Assert.assertEquals(modObjects.size(), 3);
+			
+			ModChangeObjectContainer item1 = modObjects.get(0);
+			System.out.println(item1.toString());
+			
+			Assert.assertEquals(item1.getName(), "Snyder_Objects");
+			Assert.assertEquals(item1.getModSegment(), "Snyder Trucking Warehouse");
+			Assert.assertEquals(item1.getFileToMod(), "FacilitiesData");
+			Assert.assertEquals(item1.getParentTag(), "Prefab");
+			Assert.assertEquals(item1.getParentName(), "warehouse.workshop");
+			Assert.assertEquals(item1.getChildElements().size(), 1);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Failed to insert elements into XML, error was: \n" + e.getMessage());
+		}
+	}
 	
 	private void getNodeRemoveAndConfirm (Document DOM, String nodeTarget) {
 		DOM.selectSingleNode(nodeTarget).detach();

@@ -56,8 +56,10 @@ public class ModXML {
 	private void setModMissionObjects () {
 		@SuppressWarnings("unchecked")
 		List<Element> missionElements = this.modXmlFileDOM.selectNodes("//ModData/MissionData/Objects");
+		System.out.println("\nNumber of Mission Elements in " + this.modName + " - [" + missionElements.size() + "]");
 		
 		for (Node objectsChild : missionElements) {
+			System.out.println("[" + this.modName + "] - [" + objectsChild.getPath() + "]");
 			modObjects.add(new ModChangeObjectContainer(this.modName, this.modAuthor, "MissionData", objectsChild));
 		}
 		
@@ -69,7 +71,10 @@ public class ModXML {
 	private void setModFacilityObjects () {
 		@SuppressWarnings("unchecked")
 		List<Element> facilitiesElements = this.modXmlFileDOM.selectNodes("//ModData/FacilitiesData/Objects");
+		System.out.println("\nNumber of Facilities Elements in " + this.modName + " - [" + facilitiesElements.size() + "]");
+		
 		for (Node objectsChild : facilitiesElements) {
+			System.out.println("[" + this.modName + "] - [" + objectsChild.getPath() + "]");
 			modObjects.add(new ModChangeObjectContainer(this.modName, this.modAuthor, "FacilitiesData", objectsChild));
 		}
 	}

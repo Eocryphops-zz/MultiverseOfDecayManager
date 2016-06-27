@@ -121,12 +121,13 @@ public class ModXMLHelper {
 			while (iterator.hasNext()) {
 				String path = iterator.next().getPath();
 				System.out.println("[INFO] - XML Iterator found XML file: " + path);
-				modFileTargetList.put(path.replaceAll("XmlMods\\(.*).xml", path), "");
+				modFileTargetList.put(path.replaceAll("XmlMods\\\\(.*).xml", "$1"), path);
 			}
 			
 			for (String key : modFileTargetList.keySet()) {
 				String path = modFileTargetList.get(key);
 
+				System.out.println("Building XML: " + key + ", " + path);
 				if (!xmlModsExclusions.contains(path)) {
 					modXMLs.add(buildModXMLDOM(path));
 				} else {

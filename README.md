@@ -51,6 +51,20 @@ Then:
 
 ###How to Get Started Using This for Mods/Modding
 
+#### Easy method with revision history
+* Click "Fork" in the top right next to Watch/Unwatch and Star.
+ * This gives you all my files immediately, in a single package
+ * Allows you to make your own changes to the files for your mod in a contained way
+ * When I update the Mod Manager, you get my files from upstream, because you forked, which allows you to package the latest with your Mod, so users get the fullest from it along with yourself
+ * If you like, you can even upload your mod to Github like I have here, so that users can fork yours as well, thus allowing them to make their own changes and also garner updates as well, with an effective history for them to rollback to, as needed
+
+If you use this method, then I'd recommend either being familiar with Git practices and commands, or at least use SourceTree from Atlassian, which is a visual presentation of the same, that should be easier for some to use.
+
+Github has an interface of it's own as well, but the above seems to be better for users not as familiar.
+
+Get that here:
+https://www.atlassian.com/software/sourcetree
+
 ####Templates
 
 Basic Mod Template: 

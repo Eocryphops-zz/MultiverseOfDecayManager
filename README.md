@@ -1,4 +1,4 @@
-# SoDModManager
+# SoDModManager by Phacops (A.K.A Eocryphops when the Username is taken ;))
 For managing mods that require XML changes, thus allowing multiple mods to be installed by adding elements to existing
 
 ----

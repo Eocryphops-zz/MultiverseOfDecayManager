@@ -28,12 +28,16 @@ For managing mods that require XML changes, thus allowing multiple mods to be in
 
 #### If you made changes to the XML files or included/excluded a mod:
 
-* If you 're a modder, you make changes to a mod.xml, or exclude/include one from  
- * /sodmodmanager/XmlMods/XmlFilesToExcludeFromBuilding.txt, this section is for you. 
+If: 
+* You're a modder/user and you made changes to a mod.xml
+* You exclude/include a mod from:
+ * /sodmodmanager/XmlMods/XmlFilesToExcludeFromBuilding.txt
 
-Any time you make changes, you'll need to rerun the .jar by double-clicking on it, like you would any executable.
-That will apply your changes to the relevant files. Should take a few seconds to run
-as it will clean up any old objects then apply.
+Then:
+* Any time you make a change, or have made a change:
+ * Rerun the .jar by double-clicking on it, like you would any executable
+ * That will apply your changes to the relevant files
+ * Should take a few seconds to run as it will clean up any old objects then apply
 
 ----
 
@@ -64,8 +68,14 @@ Exclusion File:
 
 ####Further Instructions for Modders
 
-* You'll add a new .xml file that you can copy from the basic of instructional templates listed above, depending on whether you need additional instructions and examples or not.
-* Fill in your own mod data, with all the objects you need in each file.
+* Copy /sodmodmanager/XmlMods/CopyMe-ModXMLTemplate.xml
+ * That's the basic template to be filled in
+* Paste it in /XmlMods/ folder
+ * This is what will be parsed by the system to apply each mod's changes
+* Fill in your own mod data, with all the objects you need in each file
+ * If you need additional instructions and examples, @see:
+ * /sodmodmanager/XmlMods/Instructions - ModXML.xml
+ * /sodmodmanager/XmlMods/FortitudeMod.xml
 * Once you're filled up, and match the excpected structure, then you just run the .jar whenever you make changes that will delete all of your old objects and add the new versions from the .xml in XmlMods.
 	
 This concept essentially leaves you to work in the direct mod file, and run the builder, 

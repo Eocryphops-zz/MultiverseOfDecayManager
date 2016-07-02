@@ -2,7 +2,11 @@
 ##### by Phacops 
 ###### (A.K.A Eocryphops when the Username is taken ;))
 
-For managing mods that require XML changes, thus allowing multiple mods to be installed by adding elements to existing
+
+##### Why do we need a mod manager?
+If we don't have a dynamic manager for State of Decay mods that modify some of the same XML files, then they simply cannot be used together without some manual tweaking.
+
+Also, because coding is fun. So, even though we'll eventually have a new game, at least we can maximize our fun with the old one until I potentially need to build a new one for the next game :D
 
 ----
 

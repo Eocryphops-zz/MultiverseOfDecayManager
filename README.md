@@ -104,3 +104,17 @@ rather than have to track down your existing entries each time, see if you corre
 and have to continue making them directly in that enormous file that bogs down the good fully-featured editors like Notepad++. Oh my.
 
 Simply put, you get strong code folding and handling abilities, without the choking ;)
+
+
+#### What else does it do?
+* Surrounds your mod changes with a wrapper so you can easily find it
+ * E.g. ModWrapper mod_author="phacops" mod_name="Fortitude_Mod" mod_segment="Savini_Entities" placement="start_tag"
+* Organizes your XML so that the Attributes of each element are in alphabetical order for easy finding
+ * E.g. Entity EntityClass="SurveyPoint" EntityGuid="403D4E79B3B28330" EntityId="4370" Layer="RTS" Name="SurveyPoint1" Pos="1501.3844,800.42261,101.17547" mod_name="Fortitude_Mod"
+ * Notice that it also applies your Mod Name as an attribute to each tag so you know exactly which ones are yours, and so it knows which ones to delete when you tell it you don't want them anymore, or if a user wants to remove your mod - easy!
+* If a Mission_Mission0.xml file doesn't exist, it will create one before adding the requested mods
+ * And, because it comes pre-packed, it can give you a 100% clean version anytime - no ruining your game because you killed the Mission file [I've certainly never done that while modding...ahem ;)]
+* If a Facilities.xml file doesn't exist, it will create one before adding the requested mods
+ * Same as above for Mission :)
+* It also has a system for ignoring mod XMLs should a user want to disable them
+* It will also later be able to change the load order for overwriting common elements, as needed

@@ -1,17 +1,9 @@
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
-import org.testng.Assert;
 
 /**
  * Objective: <br>
@@ -25,22 +17,8 @@ import org.testng.Assert;
  */
 public class ModXMLHelper {
 
-	SAXReader reader = new SAXReader();
 	boolean debug = true;
-	String xmlModsFolder = "XmlMods";
-
-	// Until I have a fuller UI, this will service skipping mods - woe be to those with a fear of manual labor :)
-	String xmlModsExclusionsFileTarget = "XmlMods/XmlFilesToExcludeFromBuilding.txt";
-	String missionXMLTarget = "Levels/Class3/mission_mission0.xml";
-	String facilitiesXMLTarget = "Libs/Prefabs/facilities.xml";
-	String originalMissionXMLTarget = "XmlMods/Backup/mission_mission0.original.xml";
-	String originalFacilitiesXMLTarget = "XmlMods/Backup/facilities.original.xml";
-	File missionFile;
-	File facilitiesFile;
-
-	Document facilitiesXmlFileDOM;
-	Document missionXmlFileDOM;
-
+	ModFileUtil modFileUtil = new ModFileUtil();
 	List<ModXML> modXMLs = new ArrayList<>();
 
 	public List<ModXML> getModXMLs() {
@@ -51,127 +29,15 @@ public class ModXMLHelper {
 		this.modXMLs = modXMLs;
 	}
 
-	public void setMissionXMLTarget (String missionTarget) {
-		this.missionXMLTarget = missionTarget;
-	}
-
-	public void setFacilitiesXMLTarget (String facilitiesTarget) {
-		this.facilitiesXMLTarget = facilitiesTarget;
-	}
-
-	public Document getFacilitiesXmlFileDOM() {
-		return facilitiesXmlFileDOM;
-	}
-
-	public void setFacilitiesXmlFileDOM(Document facilitiesXmlFileDOM) {
-		this.facilitiesXmlFileDOM = facilitiesXmlFileDOM;
-	}
-
-	public Document getMissionXmlFileDOM() {
-		return missionXmlFileDOM;
-	}
-
-	public void setMissionXmlFileDOM(Document missionXmlFileDOM) {
-		this.missionXmlFileDOM = missionXmlFileDOM;
-	}
-
-	/**
-	 * Grab an XML file, parse with JSoup, and create a Document for handy parsing
-	 * 
-	 * @param fileTarget
-	 * @return
-	 * @throws Exception
-	 */
-	public Document getXmlFileAndBuild (String fileTarget) throws Exception {
-		if (fileTarget == null) {
-			System.out.println("[ERROR] - XML file target was empty - nothing to build!");
-			throw new Exception("XML String was empty - nothing to build!");
-		}
-
-		return reader.read(fileTarget);
-	}
-
-
 	/**
 	 * Iterate the established XML Mod Directory and aggregate the files into plain Java Objects for handling
 	 * 
 	 * @throws Exception
 	 */
 	public void findAllXmlModFilesAndBuildThem () throws Exception {
-
-		File xmlModsExclusionsFile = new File(xmlModsExclusionsFileTarget);
-		
-		if (!xmlModsExclusionsFile.exists()) {
-			FileUtils.write(xmlModsExclusionsFile, "XmlMods\\CopyMe-ModXMLTemplate.xml", "UTF-8");
-		}
-		
-		List<String> xmlModsExclusions = new ArrayList<>(
-				FileUtils.readLines(xmlModsExclusionsFile, "UTF-8"));
-		File directory = new File(xmlModsFolder);
-		
-		if (directory.exists()) {
-			Iterator<File> iterator = FileUtils.iterateFiles(directory, new String[]{"xml"}, false);
-			
-			/* 
-			 * Adds more complexity but should handle if multiple items with similar names, 
-			 * Then we dump extras autonomously and not wreck the .xml
-			 */
-			Map<String, String> modFileTargetList = new HashMap<>();
-			
-			while (iterator.hasNext()) {
-				String path = iterator.next().getPath();
-				System.out.println("[INFO] - XML Iterator found XML file: " + path);
-				modFileTargetList.put(path.replaceAll("XmlMods\\\\(.*).xml", "$1"), path);
-			}
-			
-			for (String key : modFileTargetList.keySet()) {
-				String path = modFileTargetList.get(key);
-
-				System.out.println("Building XML: " + key + ", " + path);
-				if (!xmlModsExclusions.contains(path)) {
-					modXMLs.add(buildModXMLDOM(path));
-				} else {
-					System.out.println("[SKIPPED] - XML file was excluded: " + path);
-				}
-			}
-			
-		} else {
-			String msg = "[ERROR] - XmlMods directory does not exist?";
-			System.out.println(msg);
-			Assert.fail(msg);
-		}
-		
-		if (modXMLs.isEmpty()) {
-			String msg = "[ERROR] - Found NO XML Files in XmlMods directory...";
-			System.out.println(msg);
-			Assert.fail(msg);
-		}
+		modXMLs = modFileUtil.setupExpectedFiles();
 	}
 	
-	private void writeDomsToFiles() {
-		try {
-			FileUtils.write(missionFile, XMLRepairer.repair(missionXmlFileDOM.asXML()), "UTF-8");
-			System.out.println("[INFO] - Wrote modded Mission_Mission0.xml to: " + missionFile.getPath());
-			
-			FileUtils.write(facilitiesFile, XMLRepairer.repair(facilitiesXmlFileDOM.asXML()), "UTF-8");
-			System.out.println("[INFO] - Wrote modded Facilities.xml to: " + facilitiesFile.getPath());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * The singular for building a ModXML, also establishes each mod segment request as a separate child object
-	 * 
-	 * @param modFileTarget
-	 * @return
-	 * @throws Exception
-	 */
-	public ModXML buildModXMLDOM (String modFileTarget) throws Exception {
-
-		return new ModXML(getXmlFileAndBuild(modFileTarget));
-	}
-
 	/**
 	 * The master method for orchestrating the entire operation
 	 * 
@@ -182,42 +48,23 @@ public class ModXMLHelper {
 		
 		System.out.println("[INFO] - ModXMLHelper found [" + modXMLs.size() + "] Mods!");
 		
-		buildXMLFiles();
 		handleModXMLFiles();
-		writeDomsToFiles();
+		modFileUtil.writeDomsToFiles();
 		
 		System.out.println("\n\n[INFO] - Finished handling all Mods - Huzzah!");
 	}
 	
-	public void buildXMLFiles () throws Exception {
-		missionFile = new File(missionXMLTarget);
-		facilitiesFile = new File(facilitiesXMLTarget);
+	public void handleModXMLFiles () throws Exception {
 		
-		if (!missionFile.exists()) {
-			setMissionXmlFileDOM(
-					getXmlFileAndBuild(originalMissionXMLTarget));
-		} else {
-			setMissionXmlFileDOM(
-					getXmlFileAndBuild(missionXMLTarget));
-		}
+		modFileUtil.checkAndBuildMissionAndFacilities();
 		
-		if (!facilitiesFile.exists()) {
-			setFacilitiesXmlFileDOM(
-					getXmlFileAndBuild(originalFacilitiesXMLTarget));
-		} else {
-			setFacilitiesXmlFileDOM(
-					getXmlFileAndBuild(facilitiesXMLTarget));
-		}
-	}
-	
-	public void handleModXMLFiles () {
 		for (ModXML modXml : modXMLs) {
 			List<ModChangeObjectContainer> modObjects = modXml.getModObjects();
 			
 			System.out.println("\n\n==========================="
 					+ "\n[INFO] - Now loading: " + modXml.modName + ", "
-							+ "which contained [" + modObjects.size() + "] overall change requests..."
-							+ "\n===========================\n");
+						+ "which contained [" + modObjects.size() + "] overall change requests..."
+					+ "\n===========================\n");
 			
 			for (ModChangeObjectContainer container : modObjects ) {
 				handleChangesForMod(container);
@@ -252,6 +99,9 @@ public class ModXMLHelper {
 	 */
 	public Element getExpectedParentElement(ModChangeObjectContainer modContainerElement) {
 
+		Document facilitiesXmlFileDOM = modFileUtil.getFacilitiesXmlFileDOM();
+		Document missionXmlFileDOM = modFileUtil.getMissionXmlFileDOM();
+		
 		Element domToAddTo = (modContainerElement.getFileToMod()
 				.equals("FacilitiesData")) ? facilitiesXmlFileDOM.getRootElement() : missionXmlFileDOM.getRootElement();
 

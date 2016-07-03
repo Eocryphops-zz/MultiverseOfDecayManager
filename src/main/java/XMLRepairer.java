@@ -18,13 +18,19 @@ import org.xml.sax.InputSource;
 
 /**
  * Problem Statement:
- * JSoup is a cheeky monkey that sets all of our XML tags/attributes to lowercase, breaking the CryEngine XML format.<br>
+ * Although JSoup is the most wieldy parser, I think, it's still a cheeky monkey 
+ * that sets all of our XML tags/attributes to lowercase, breaking the CryEngine XML format.<br>
  * When starting the game after a DOM write, it destroys all entities and prefabs in the game.<br>
  * Essentially, since it is still well-formed XML, the game still runs, but all items are missing.<br>
+ * <br>
+ * An alternative, semi-wieldy lib, called Dom4j, wraps all new elements in self-closing tags segments when pushed as a new object.<br>
+ * Seems we could stop this by applying the attributes after the fact but we want a single generation string for ease of handling.<br>
+ * Therefore, we have to create a fix class to remove the additional characters, 
+ * which is still more simple than attribute iteration & addition, I think.<br>
+ * <br>
  * Objective:<br>
  * <br>
- * and since JSoup is the most versatile and efficient for modelling and modifying our XML, 
- * we'll need a class to fix the tags after the fact.<br>
+ * Create a class with a simple repair function, that can have the final Dom4j results passed to it, and return the clean version<br>
  * <br>
  * Analysis:<br>
  * We'll just go for the simplest method, which is to iterate the expected tags and attributes from the original, 

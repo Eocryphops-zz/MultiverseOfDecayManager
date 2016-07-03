@@ -1,7 +1,10 @@
-# SoDModManager 
+# Multi-verse of Decay Manager (MoD Manager)
 ##### by Phacops 
 ###### (A.K.A Eocryphops when the Username is taken ;))
 
+https://github.com/Eocryphops/Multi-verseOfDecayManager
+
+A Mod Manager for State of Decay, able to manage and combine multiple mods that change the state of Mission_Mission0.xml or Facilities.xml.
 
 ##### Why do we need a mod manager?
 If we don't have a dynamic manager for State of Decay mods that modify some of the same XML files, then they simply cannot be used together without some manual tweaking.

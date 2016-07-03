@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
 
-<!-- Your mod details to uniquely identify you - mod_name would preferably be unique, and reasonably short, 
-which should hold true for your name - perhaps your online alias-->
-<ModData mod_name="NAME_OF_MOD" mod_author="AUTHOR_OF_MOD">
+<!-- Your mod details to uniquely identify you: 
+mod_name - Must be unique, to your knowledge, and preferably reasonably short, for the sake of character counts in files 
+mod_author - which should hold true for your name - perhaps your online alias
+mod_description - A short paragraph or two about what your mod does, 
+	Not handled by system until UI is implemented, 
+	which will later be funneled into a description region for users to decide whether to enable or disable, 
+	For now, it just lets us have an understanding of what the end effect of this file should be.
+-->
+<ModData mod_name="NAME_OF_MOD" mod_author="AUTHOR_OF_MOD" mod_description="DESCRIPTION_OF_MOD">
 
+	<!-- Anything that needs to be added to the Mission_Mission0.xml needs a sub-object placed here.
+		Note that the only time this should happen is things like Entities, or Time of Day changes 
+			(a feature which is uncommon so I'll handle that later)-->
+	<MissionData>
+		<Objects name="NAME_Entities" mod_segment="SEGMENT_NAME" parent_tag="Objects">
+			<Object Name="UNIQUE_NAME"/>
+		</Objects>
+		
+		<!-- Example - No need to add multiple Objects here, because the Mission file just dumps everything in one bucket
+			Note: Mission_Mission0.xml items can be of many element types - 
+				but Mission can also have <Object> containers, such as decals -->
+		<Objects name="Savini_Entities" mod_segment="Savini/Riverside" parent_tag="Objects">
+			<!-- Don't try to use this in a real mod - I chopped it up so it was a clearer example ;) -->
+			<Entity Name="SaviniEntity" Pos="1501.3844,800.42261,101.17547" EntityClass="SurveyPoint" EntityId="4370" EntityGuid="403D4E79B3B28330"/>
+		</Objects>
+	</MissionData>
+	
 	<!-- Anything that needs to be added to the Facilities.xml needs a sub-object placed here -->
 	<FacilitiesData>
 	
@@ -49,21 +72,4 @@ which should hold true for your name - perhaps your online alias-->
 		</Objects>
 	</FacilitiesData>
 	
-	
-	<!-- Anything that needs to be added to the Mission_Mission0.xml needs a sub-object placed here.
-		Note that the only time this should happen is things like Entities, or Time of Day changes 
-			(a feature which is uncommon so I'll handle that later)-->
-	<MissionData>
-		<Objects name="NAME_Entities" mod_segment="SEGMENT_NAME" parent_tag="Objects">
-			<Object Name="UNIQUE_NAME"/>
-		</Objects>
-		
-		<!-- Example - No need to add multiple Objects here, because the Mission file just dumps everything in one bucket
-			Note: Mission_Mission0.xml items can be of many element types - 
-				but Mission can also have <Object> containers, such as decals -->
-		<Objects name="Savini_Entities" mod_segment="Savini/Riverside" parent_tag="Objects">
-			<!-- Don't try to use this in a real mod - I chopped it up so it was a clearer example ;) -->
-			<Entity Name="SaviniEntity" Pos="1501.3844,800.42261,101.17547" EntityClass="SurveyPoint" EntityId="4370" EntityGuid="403D4E79B3B28330"/>
-		</Objects>
-	</MissionData>
 </ModData>

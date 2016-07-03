@@ -1,5 +1,15 @@
-# SoDModManager
-For managing mods that require XML changes, thus allowing multiple mods to be installed by adding elements to existing
+# Multi-verse of Decay Manager (MoD Manager)
+##### by Phacops 
+###### (A.K.A Eocryphops when the Username is taken ;))
+
+https://github.com/Eocryphops/Multi-verseOfDecayManager
+
+A Mod Manager for State of Decay, able to manage and combine multiple mods that change the state of Mission_Mission0.xml or Facilities.xml.
+
+##### Why do we need a mod manager?
+If we don't have a dynamic manager for State of Decay mods that modify some of the same XML files, then they simply cannot be used together without some manual tweaking.
+
+Also, because coding is fun. So, even though we'll eventually have a new game, at least we can maximize our fun with the old one until I potentially need to build a new one for the next game :D
 
 ----
 
@@ -44,6 +54,20 @@ Then:
 
 ###How to Get Started Using This for Mods/Modding
 
+#### Easy method with revision history
+* Click "Fork" in the top right next to Watch/Unwatch and Star.
+ * This gives you all my files immediately, in a single package
+ * Allows you to make your own changes to the files for your mod in a contained way
+ * When I update the Mod Manager, you get my files from upstream, because you forked, which allows you to package the latest with your Mod, so users get the fullest from it along with yourself
+ * If you like, you can even upload your mod to Github like I have here, so that users can fork yours as well, thus allowing them to make their own changes and also garner updates as well, with an effective history for them to rollback to, as needed
+
+If you use this method, then I'd recommend either being familiar with Git practices and commands, or at least use SourceTree from Atlassian, which is a visual presentation of the same, that should be easier for some to use.
+
+Github has an interface of it's own as well, but the above seems to be better for users not as familiar.
+
+Get that here:
+https://www.atlassian.com/software/sourcetree
+
 ####Templates
 
 Basic Mod Template: 
@@ -83,3 +107,17 @@ rather than have to track down your existing entries each time, see if you corre
 and have to continue making them directly in that enormous file that bogs down the good fully-featured editors like Notepad++. Oh my.
 
 Simply put, you get strong code folding and handling abilities, without the choking ;)
+
+
+#### What else does it do?
+* Surrounds your mod changes with a wrapper so you can easily find it
+ * E.g. ModWrapper mod_author="phacops" mod_name="Fortitude_Mod" mod_segment="Savini_Entities" placement="start_tag"
+* Organizes your XML so that the Attributes of each element are in alphabetical order for easy finding
+ * E.g. Entity EntityClass="SurveyPoint" EntityGuid="403D4E79B3B28330" EntityId="4370" Layer="RTS" Name="SurveyPoint1" Pos="1501.3844,800.42261,101.17547" mod_name="Fortitude_Mod"
+ * Notice that it also applies your Mod Name as an attribute to each tag so you know exactly which ones are yours, and so it knows which ones to delete when you tell it you don't want them anymore, or if a user wants to remove your mod - easy!
+* If a Mission_Mission0.xml file doesn't exist, it will create one before adding the requested mods
+ * And, because it comes pre-packed, it can give you a 100% clean version anytime - no ruining your game because you killed the Mission file [I've certainly never done that while modding...ahem ;)]
+* If a Facilities.xml file doesn't exist, it will create one before adding the requested mods
+ * Same as above for Mission :)
+* It also has a system for ignoring mod XMLs should a user want to disable them
+* It will also later be able to change the load order for overwriting common elements, as needed

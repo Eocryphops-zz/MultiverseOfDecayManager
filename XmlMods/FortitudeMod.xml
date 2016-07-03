@@ -1,13 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
 <ModData mod_name="Fortitude_Mod" mod_author="phacops">
+
+	<MissionData>
+		<Objects name="Savini_Entities" mod_segment="Savini/Riverside" parent_tag="Objects">
+				<Entity Name="Fortitude_Rope1" Material="objects/props/mine/chaff" Pos="1534.6277,804.91797,96.5" EntityClass="RopeEntity" EntityId="113" EntityGuid="4F50789C2D816AB8">
+				 <Rope flags="55" radius="0.02" anchor_radius="0.1" num_seg="8" num_sides="4" texu="1" texv="10" ph_num_seg="16" ph_sub_vtxs="20" mass="-1" friction="2" friction_pull="2" wind="0,0,0" wind_var="0" air_resist="0" water_resist="0" joint_lim="0" max_force="0" tension="0.0049999999" maxTimeStep="0.02" minEnergy="0.0016" damping="0.2" gravity="0,0,-13">
+				  <Points>
+				   <Point Pos="-5.769165,-5.6749268,1"/>
+				   <Point Pos="5.769165,5.6748657,-1"/>
+				   <Point Pos="19.622314,19.332031,2.625"/>
+				  </Points>
+				 </Rope>
+				</Entity>
+				
+				<Entity Name="Fortitude_Rope2" Material="objects/props/mine/chaff" Pos="1533.1826,806.20215,96.5" EntityClass="RopeEntity" EntityId="114" EntityGuid="4EA653EC7ABED820">
+				 <Rope flags="55" radius="0.02" anchor_radius="0.1" num_seg="8" num_sides="4" texu="1" texv="10" ph_num_seg="16" ph_sub_vtxs="20" mass="-1" friction="2" friction_pull="2" wind="0,0,0" wind_var="0" air_resist="0" water_resist="0" joint_lim="0" max_force="0" tension="0.0049999999" maxTimeStep="0.02" minEnergy="0.0016" damping="0.2" gravity="0,0,-13">
+				  <Points>
+				   <Point Pos="-5.7199707,-5.5042114,1.0035782"/>
+				   <Point Pos="5.7198486,5.5042725,-1.0035782"/>
+				   <Point Pos="19.496094,19.076172,2.6214218"/>
+				  </Points>
+				 </Rope>
+				</Entity>
+				
+				<Entity Name="Fortitude_Rope3" Material="objects/props/mine/chaff" Pos="1528.3326,801.24506,96.5" EntityClass="RopeEntity" EntityId="116" EntityGuid="463A83EA5E4AACF4">
+				 <Rope flags="61" radius="0.02" anchor_radius="0.1" num_seg="20" num_sides="4" texu="1" texv="10" ph_num_seg="8" ph_sub_vtxs="3" mass="-1" friction="2" friction_pull="2" wind="0,0,0" wind_var="0" air_resist="0" water_resist="0" joint_lim="0" max_force="0" tension="0" maxTimeStep="0.02" minEnergy="0.0016" damping="0.2" gravity="0,0,-13">
+				  <Points>
+				   <Point Pos="-0.80090332,-0.68945313,0.13822937"/>
+				   <Point Pos="0.80090332,0.68945313,-0.138237"/>
+				   <Point Pos="3.3570557,3.2804565,-0.784729"/>
+				   <Point Pos="6.4182129,6.1741943,-1.4561615"/>
+				   <Point Pos="9.9987793,9.6990967,-1.8755798"/>
+				   <Point Pos="14.280762,13.967468,-1.126358"/>
+				   <Point Pos="18.464478,18.022583,-0.28161621"/>
+				   <Point Pos="20.417358,20.004944,0.30229187"/>
+				   <Point Pos="22.58252,22.201172,1.1599197"/>
+				   <Point Pos="24.11792,23.641113,2.0759583"/>
+				   <Point Pos="24.505371,24.046936,2.2555389"/>
+				  </Points>
+				 </Rope>
+				</Entity>
+				
+				<Entity Name="Fortitude_Rope4" Material="objects/props/mine/chaff" Pos="1529.5062,799.9826,96.5" EntityClass="RopeEntity" EntityId="115" EntityGuid="4C2ABBDA10006953">
+				 <Rope flags="61" radius="0.02" anchor_radius="0.1" num_seg="20" num_sides="4" texu="1" texv="10" ph_num_seg="8" ph_sub_vtxs="3" mass="-1" friction="2" friction_pull="2" wind="0,0,0" wind_var="0" air_resist="0" water_resist="0" joint_lim="0" max_force="0" tension="0" maxTimeStep="0.02" minEnergy="0.0016" damping="0.2" gravity="0,0,-13">
+				  <Points>
+				   <Point Pos="-0.79577637,-0.7723999,0.164711"/>
+				   <Point Pos="0.79577637,0.7723999,-0.16470337"/>
+				   <Point Pos="3.3621826,3.1975098,-0.75824738"/>
+				   <Point Pos="6.4306641,6.2415771,-1.4296799"/>
+				   <Point Pos="10.003906,9.6161499,-1.8490982"/>
+				   <Point Pos="14.285889,13.884521,-1.0998764"/>
+				   <Point Pos="18.386353,17.985352,-0.25513458"/>
+				   <Point Pos="20.326538,19.936157,0.21029663"/>
+				   <Point Pos="22.573364,22.149109,1.1864014"/>
+				   <Point Pos="24.049438,23.559631,2.0385132"/>
+				   <Point Pos="24.645508,24.054199,2.2820206"/>
+				  </Points>
+				 </Rope>
+				</Entity>
+				
+				<Entity Name="Fortitude_Rooftop_SurveyPoint" Pos="1501.3844,800.42261,101.17547" EntityClass="SurveyPoint" EntityId="83" EntityGuid="41EB248E9E1A10E9" Layer="Main">
+					<Properties SurveyGroupId=""/>
+				</Entity>
+		</Objects>
+	</MissionData>
+	
 	<FacilitiesData>
 		<Objects name="Snyder_Objects" mod_segment="Snyder Trucking Warehouse" parent_tag="Prefab" parent_name="warehouse.workshop">
-			<Object Type="Brush" Name="Snyder_Fortitude" Pos="2.5,-2.5,0" FloorNumber="-1" Rotate="0.383,0,0,-0.924" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/vehicles/musclecar/musclecar.cga" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
-			<Object Type="Brush" Name="Snyder_Fortitude-Truck1" Pos="49.13483,-7.83943,1.5" FloorNumber="-1" Rotate="-0.655,0.282,0.648,0.266" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/industrial/truck_trailer/truck_trailer_01.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
-			<Object Type="Brush" Name="Snyder_Fortitude-Truck2" Pos="43.26796,-25.08663,0" FloorNumber="-1" Rotate="0.359,0,0,0.933" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/industrial/truck_trailer/truck_trailer_01.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
-			<Object Type="Brush" Name="Snyder_Fortitude-Truck3" Pos="32.05709,-33.00128,1.50468" FloorNumber="-1" Rotate="0.247,0.666,-0.239,0.662" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/industrial/truck_trailer/truck_trailer_01.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
-			<Object Type="Brush" Name="Snyder_Fortitude-Truck4" Pos="24.86065,-44.2547,1.29537" FloorNumber="-1" Rotate="0.306,0.638,-0.299,0.64" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/industrial/truck_trailer/truck_trailer_01.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+			<Object Type="Brush" Name="Fortitude_Core_Geometry_Container" Pos="0,0,0" FloorNumber="-1" Rotate="1,0,0,0" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/snyder.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="0" RndFlags="536870920"/>
+			<Object Type="Brush" Name="Fortitude" Pos="2.5,-2.5,0" FloorNumber="-1" Rotate="0.383,0,0,-0.924" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/vehicles/musclecar/musclecar.cga" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+			<Object Type="Brush" Name="Fortitude-Truck1" Pos="49.13483,-7.83943,1.5" FloorNumber="-1" Rotate="-0.655,0.282,0.648,0.266" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/industrial/truck_trailer/truck_trailer_01.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+			<Object Type="Brush" Name="Fortitude-Truck2" Pos="43.26796,-25.08663,0" FloorNumber="-1" Rotate="0.359,0,0,0.933" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/industrial/truck_trailer/truck_trailer_01.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+			<Object Type="Brush" Name="Fortitude-Truck3" Pos="32.05709,-33.00128,1.50468" FloorNumber="-1" Rotate="0.247,0.666,-0.239,0.662" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/industrial/truck_trailer/truck_trailer_01.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+			<Object Type="Brush" Name="Fortitude-Truck4" Pos="24.86065,-44.2547,1.29537" FloorNumber="-1" Rotate="0.306,0.638,-0.299,0.64" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/industrial/truck_trailer/truck_trailer_01.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
 		</Objects>
 		
 		<Objects name="Savini_Objects" mod_segment="Savini/Riverside" parent_tag="Prefab" parent_name="riverside.command_center">
@@ -500,68 +566,4 @@
 		</Objects>
 	</FacilitiesData>
 	
-	
-	<MissionData>
-		<Objects name="Savini_Entities" mod_segment="Savini/Riverside" parent_tag="Objects">
-				<Entity Name="Rope9" Material="objects/props/mine/chaff" Pos="1534.6277,804.91797,96.5" EntityClass="RopeEntity" EntityId="113" EntityGuid="4F50789C2D816AB8">
-				 <Rope flags="55" radius="0.02" anchor_radius="0.1" num_seg="8" num_sides="4" texu="1" texv="10" ph_num_seg="16" ph_sub_vtxs="20" mass="-1" friction="2" friction_pull="2" wind="0,0,0" wind_var="0" air_resist="0" water_resist="0" joint_lim="0" max_force="0" tension="0.0049999999" maxTimeStep="0.02" minEnergy="0.0016" damping="0.2" gravity="0,0,-13">
-				  <Points>
-				   <Point Pos="-5.769165,-5.6749268,1"/>
-				   <Point Pos="5.769165,5.6748657,-1"/>
-				   <Point Pos="19.622314,19.332031,2.625"/>
-				  </Points>
-				 </Rope>
-				</Entity>
-				
-				<Entity Name="Rope10" Material="objects/props/mine/chaff" Pos="1533.1826,806.20215,96.5" EntityClass="RopeEntity" EntityId="114" EntityGuid="4EA653EC7ABED820">
-				 <Rope flags="55" radius="0.02" anchor_radius="0.1" num_seg="8" num_sides="4" texu="1" texv="10" ph_num_seg="16" ph_sub_vtxs="20" mass="-1" friction="2" friction_pull="2" wind="0,0,0" wind_var="0" air_resist="0" water_resist="0" joint_lim="0" max_force="0" tension="0.0049999999" maxTimeStep="0.02" minEnergy="0.0016" damping="0.2" gravity="0,0,-13">
-				  <Points>
-				   <Point Pos="-5.7199707,-5.5042114,1.0035782"/>
-				   <Point Pos="5.7198486,5.5042725,-1.0035782"/>
-				   <Point Pos="19.496094,19.076172,2.6214218"/>
-				  </Points>
-				 </Rope>
-				</Entity>
-				
-				<Entity Name="Rope18" Material="objects/props/mine/chaff" Pos="1528.3326,801.24506,96.5" EntityClass="RopeEntity" EntityId="116" EntityGuid="463A83EA5E4AACF4">
-				 <Rope flags="61" radius="0.02" anchor_radius="0.1" num_seg="20" num_sides="4" texu="1" texv="10" ph_num_seg="8" ph_sub_vtxs="3" mass="-1" friction="2" friction_pull="2" wind="0,0,0" wind_var="0" air_resist="0" water_resist="0" joint_lim="0" max_force="0" tension="0" maxTimeStep="0.02" minEnergy="0.0016" damping="0.2" gravity="0,0,-13">
-				  <Points>
-				   <Point Pos="-0.80090332,-0.68945313,0.13822937"/>
-				   <Point Pos="0.80090332,0.68945313,-0.138237"/>
-				   <Point Pos="3.3570557,3.2804565,-0.784729"/>
-				   <Point Pos="6.4182129,6.1741943,-1.4561615"/>
-				   <Point Pos="9.9987793,9.6990967,-1.8755798"/>
-				   <Point Pos="14.280762,13.967468,-1.126358"/>
-				   <Point Pos="18.464478,18.022583,-0.28161621"/>
-				   <Point Pos="20.417358,20.004944,0.30229187"/>
-				   <Point Pos="22.58252,22.201172,1.1599197"/>
-				   <Point Pos="24.11792,23.641113,2.0759583"/>
-				   <Point Pos="24.505371,24.046936,2.2555389"/>
-				  </Points>
-				 </Rope>
-				</Entity>
-				
-				<Entity Name="Rope19" Material="objects/props/mine/chaff" Pos="1529.5062,799.9826,96.5" EntityClass="RopeEntity" EntityId="115" EntityGuid="4C2ABBDA10006953">
-				 <Rope flags="61" radius="0.02" anchor_radius="0.1" num_seg="20" num_sides="4" texu="1" texv="10" ph_num_seg="8" ph_sub_vtxs="3" mass="-1" friction="2" friction_pull="2" wind="0,0,0" wind_var="0" air_resist="0" water_resist="0" joint_lim="0" max_force="0" tension="0" maxTimeStep="0.02" minEnergy="0.0016" damping="0.2" gravity="0,0,-13">
-				  <Points>
-				   <Point Pos="-0.79577637,-0.7723999,0.164711"/>
-				   <Point Pos="0.79577637,0.7723999,-0.16470337"/>
-				   <Point Pos="3.3621826,3.1975098,-0.75824738"/>
-				   <Point Pos="6.4306641,6.2415771,-1.4296799"/>
-				   <Point Pos="10.003906,9.6161499,-1.8490982"/>
-				   <Point Pos="14.285889,13.884521,-1.0998764"/>
-				   <Point Pos="18.386353,17.985352,-0.25513458"/>
-				   <Point Pos="20.326538,19.936157,0.21029663"/>
-				   <Point Pos="22.573364,22.149109,1.1864014"/>
-				   <Point Pos="24.049438,23.559631,2.0385132"/>
-				   <Point Pos="24.645508,24.054199,2.2820206"/>
-				  </Points>
-				 </Rope>
-				</Entity>
-				
-				<Entity Name="SurveyPoint1" Pos="1501.3844,800.42261,101.17547" EntityClass="SurveyPoint" EntityId="4370" EntityGuid="403D4E79B3B28330" Layer="RTS">
-				 <Properties SurveyGroupId="tanner_watertower"/>
-				</Entity>
-		</Objects>
-	</MissionData>
 </ModData>

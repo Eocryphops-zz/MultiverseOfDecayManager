@@ -3,6 +3,17 @@
 <ModData mod_name="Fortitude_Mod" mod_segment="Bases - Snyder_Trucking_Warehouse" mod_author="phacops" 
 	mod_description="When moving into the Snyder Trucking Warehouse, this adds barricades and blockades and walkways to the area">
 	
+	<!-- Uncomment the following and apply Mod_Name if you change the name of this mod and need to clean it from old files. 
+		If the manager applies old names, we change it, and it doesn't know to remove it, then the duplicates will crash the game on start. -->
+	
+	<!--<CleanupOldModNames name="OldModNameCleanup">
+		<Objects>
+		
+			<Object Mod_Name="Fortitude_Mod"/>
+			
+		</Objects>
+	</CleanupOldModNames>-->
+	
 	<FacilitiesData>
 		<Objects name="Snyder_Objects" mod_subsegment="Snyder Trucking Warehouse" parent_tag="Prefab" parent_name="warehouse.workshop">
 		

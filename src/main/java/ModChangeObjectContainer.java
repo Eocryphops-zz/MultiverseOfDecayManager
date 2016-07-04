@@ -36,7 +36,12 @@ public class ModChangeObjectContainer {
 		this.modSegment = containerElement.valueOf("@mod_segment");
 		this.parentTag = containerElement.valueOf("@parent_tag");
 		this.parentName = containerElement.valueOf("@parent_name");
-		this.childElements = containerElement.selectNodes("//Objects[@name='" + this.name + "']/descendant::*");
+		
+		if (fileToMod.equals("CleanupOldModNames")) {
+			this.childElements = containerElement.selectNodes("//Objects/descendant::*");
+		} else {
+			this.childElements = containerElement.selectNodes("//Objects[@name='" + this.name + "']/descendant::*");
+		}
 	}
 	
 	public String getModName() {

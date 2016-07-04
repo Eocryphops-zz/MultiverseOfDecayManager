@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<ModData mod_name="TestCleanup" mod_author="phacops" mod_description="Test cleaning up an old mod name">
+	
+	<CleanupOldModNames name="OldModNameCleanup" description="Fill this with an Object per old mod name you need to cleanup; 
+		although it isn't mandatory, it's nice because changing your mod name could potentially break the files">
+		<Objects>
+			<Object name="Fortitude_Mod"/>
+		</Objects>
+	</CleanupOldModNames>
+</ModData>

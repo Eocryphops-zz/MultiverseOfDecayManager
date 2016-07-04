@@ -2,8 +2,11 @@
 <!DOCTYPE xml>
 <ModData mod_name="Fortitude_Mod-Bases-Snyder_Trucking_Warehouse" mod_author="phacops" mod_description="When moving into the Snyder Trucking Warehouse, this adds barricades and blockades and walkways to the area">
 	
-	<CleanupOldModNames>
-		<Object name="Fortitude_Mod"/>
+	<CleanupOldModNames name="OldModNameCleanup" description="Fill this with an Object per old mod name you need to cleanup; 
+		although it isn't mandatory, it's nice because changing your mod name could potentially break the files">
+		<Objects>
+			<Object name="Fortitude_Mod"/>
+		</Objects>
 	</CleanupOldModNames>
 	
 	<FacilitiesData>

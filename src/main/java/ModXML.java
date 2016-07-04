@@ -43,11 +43,14 @@ public class ModXML {
 	}
 	
 	/**
-	 * Build the objects separately for facilities and mission
+	 * Build the objects separately for cleanup, facilities, and mission
+	 * Note: Any new elements must be set here explicitly - 
+	 * just an attempt at greater integrity by not parsing unwanted code
 	 */
 	private void setModObjects () {
-		setModFacilityObjects();
+		setModCleanupObjects();
 		setModMissionObjects();
+		setModFacilityObjects();
 	}
 	
 	/**
@@ -76,6 +79,23 @@ public class ModXML {
 		for (Node objectsChild : facilitiesElements) {
 			System.out.println("[" + this.modName + "] - [" + objectsChild.getPath() + "]");
 			modObjects.add(new ModChangeObjectContainer(this.modName, this.modAuthor, "FacilitiesData", objectsChild));
+		}
+	}
+	
+	/**
+	 * Create cleanup-related objects and add them to our list of all objects
+	 * These will be iterated for destroying deprecated elements in the game files before applying the new
+	 * This is only if a mod changes names during the course of development, 
+	 * otherwise all elements are naturally destroyed before applying the mod.
+	 */
+	private void setModCleanupObjects () {
+		@SuppressWarnings("unchecked")
+		List<Element> cleanupElements = this.modXmlFileDOM.selectNodes("//ModData/CleanupOldModNames/Objects");
+		System.out.println("\nNumber of Cleanup Elements in " + this.modName + " - [" + cleanupElements.size() + "]");
+		
+		for (Node objectsChild : cleanupElements) {
+			System.out.println("[" + this.modName + "] - [" + objectsChild.getPath() + "]");
+			modObjects.add(new ModChangeObjectContainer(this.modName, this.modAuthor, "CleanupOldModNames", objectsChild));
 		}
 	}
 	

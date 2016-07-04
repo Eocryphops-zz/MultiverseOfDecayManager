@@ -20,6 +20,8 @@ public class ModXMLHelper {
 	boolean debug = true;
 	ModFileUtil modFileUtil = new ModFileUtil();
 	List<ModXML> modXMLs = new ArrayList<>();
+	Document facilitiesXmlFileDOM;
+	Document missionXmlFileDOM;
 
 	public List<ModXML> getModXMLs() {
 		return modXMLs;
@@ -57,6 +59,9 @@ public class ModXMLHelper {
 	public void handleModXMLFiles () throws Exception {
 		
 		modFileUtil.checkAndBuildMissionAndFacilities();
+		facilitiesXmlFileDOM = modFileUtil.getFacilitiesXmlFileDOM();
+		missionXmlFileDOM = modFileUtil.getMissionXmlFileDOM();
+		
 		
 		for (ModXML modXml : modXMLs) {
 			List<ModChangeObjectContainer> modObjects = modXml.getModObjects();
@@ -80,10 +85,34 @@ public class ModXMLHelper {
 	 * @param modChangeRequestContainer
 	 */
 	public void handleChangesForMod (ModChangeObjectContainer modChangeRequestContainer) {
+
+		// Either someone left the boilerplate wrapper unfilled, or something else went wrong
+		if (modChangeRequestContainer.getChildElements().size() == 0) { 
+			System.out.println("No child elements in this container? That's weird...container was: "
+					+ "[mod_name][" + modChangeRequestContainer.getModName() +  "], "
+					+ "[mod_segment][" + modChangeRequestContainer.getModSegment() + "], "
+					+ "[name][" + modChangeRequestContainer.getName() + "]");
+			return; 
+		}
 		
-		Element parentToMod = getExpectedParentElement(modChangeRequestContainer);
-		parentToMod = removeModElementsIfPresent(modChangeRequestContainer.getModName(), parentToMod);
-		parentToMod = addModElements(modChangeRequestContainer, parentToMod);
+		if (modChangeRequestContainer.getFileToMod().equals("CleanupOldModNames")) {
+			@SuppressWarnings("unchecked")
+			List<Element> eachOldName = 
+				modChangeRequestContainer.getChildElements();
+
+			// Destroy any elements matching mod_name in the game files to prevent conflict
+			for (Element element : eachOldName) {
+				removeModElementsIfPresent(
+						element.valueOf("@name"), facilitiesXmlFileDOM.getRootElement(), true);
+				removeModElementsIfPresent(
+						element.valueOf("@name"), missionXmlFileDOM.getRootElement(), true);
+			}
+		} else {
+
+			Element parentToMod = getExpectedParentElement(modChangeRequestContainer);
+			parentToMod = removeModElementsIfPresent(modChangeRequestContainer.getModName(), parentToMod);
+			parentToMod = addModElements(modChangeRequestContainer, parentToMod);
+		}
 	}
 
 
@@ -100,34 +129,8 @@ public class ModXMLHelper {
 	 */
 	public Element getExpectedParentElement(ModChangeObjectContainer modContainerElement) {
 
-		Document facilitiesXmlFileDOM = modFileUtil.getFacilitiesXmlFileDOM();
-		Document missionXmlFileDOM = modFileUtil.getMissionXmlFileDOM();
-		Element domToAddTo = facilitiesXmlFileDOM.getRootElement();
-		
-		switch (modContainerElement.getFileToMod()) {
-		case "CleanupOldModNames":
-			@SuppressWarnings("unchecked")
-			List<Element> eachOldName = modContainerElement.getChildElements().get(0).selectNodes("//Object");
-			
-			for (Element element : eachOldName) {
-			removeModElementsIfPresent(
-					element.valueOf("@name"), facilitiesXmlFileDOM.getRootElement(), true);
-			removeModElementsIfPresent(
-					element.valueOf("@name"), missionXmlFileDOM.getRootElement(), true);
-			}
-			//TODO - Rework structure so that Cleanup is pre-flight, not embedded
-			return facilitiesXmlFileDOM.getRootElement();
-		case "FacilitiesData":
-			domToAddTo = facilitiesXmlFileDOM.getRootElement();
-			break;
-		case "MissionData":
-			domToAddTo = missionXmlFileDOM.getRootElement();
-			break;
-		default:
-			// TODO singular builder that gets all ModXMLs, confirms they are correctly constructed, and dumps them if they are not
-			facilitiesXmlFileDOM.getRootElement();
-		}
-		
+		Element domToAddTo = (modContainerElement.getFileToMod()
+				.equals("FacilitiesData")) ? facilitiesXmlFileDOM.getRootElement() : missionXmlFileDOM.getRootElement();
 
 		String parentTag = modContainerElement.getParentTag();
 		String parentName = modContainerElement.getParentName();

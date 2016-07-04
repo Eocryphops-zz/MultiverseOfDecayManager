@@ -65,16 +65,17 @@ public class ModXMLHelper {
 		
 		for (ModXML modXml : modXMLs) {
 			List<ModChangeObjectContainer> modObjects = modXml.getModObjects();
+			cleanupAllOldReferences(modXml.getModName());
 			
 			System.out.println("\n\n==========================="
-					+ "\n[INFO] - Now loading: " + modXml.modName + ", "
+					+ "\n[INFO] - Now loading: " + modXml.getModName() + ", "
 						+ "which contained [" + modObjects.size() + "] overall change requests..."
 					+ "\n===========================\n");
 			
 			for (ModChangeObjectContainer container : modObjects ) {
 				handleChangesForMod(container);
 				System.out.println("\n\n[INFO] - Completed handling for [file][mod_name][mod_section]: ["
-						+ container.getFileToMod() + "][" + container.getModName() + "][" + container.getModSegment() + "]\n\n");
+						+ container.getFileToMod() + "][" + modXml.getModName() + "][" + container.getModSubSegment() + "]\n\n");
 			}
 		}
 	}
@@ -90,31 +91,31 @@ public class ModXMLHelper {
 		if (modChangeRequestContainer.getChildElements().size() == 0) { 
 			System.out.println("No child elements in this container? That's weird...container was: "
 					+ "[mod_name][" + modChangeRequestContainer.getModName() +  "], "
-					+ "[mod_segment][" + modChangeRequestContainer.getModSegment() + "], "
+					+ "[mod_segment][" + modChangeRequestContainer.getModSubSegment() + "], "
 					+ "[name][" + modChangeRequestContainer.getName() + "]");
 			return; 
 		}
 		
 		if (modChangeRequestContainer.getFileToMod().equals("CleanupOldModNames")) {
-			@SuppressWarnings("unchecked")
-			List<Element> eachOldName = 
-				modChangeRequestContainer.getChildElements();
+			List<Element> deprecatedNamesOfThisMod = modChangeRequestContainer.getChildElements();
 
 			// Destroy any elements matching mod_name in the game files to prevent conflict
-			for (Element element : eachOldName) {
-				removeModElementsIfPresent(
-						element.valueOf("@name"), facilitiesXmlFileDOM.getRootElement(), true);
-				removeModElementsIfPresent(
-						element.valueOf("@name"), missionXmlFileDOM.getRootElement(), true);
+			for (Element deprecatedName : deprecatedNamesOfThisMod) {
+				cleanupAllOldReferences(deprecatedName.valueOf("@Mod_Name"));
 			}
 		} else {
 
 			Element parentToMod = getExpectedParentElement(modChangeRequestContainer);
-			parentToMod = removeModElementsIfPresent(modChangeRequestContainer.getModName(), parentToMod);
 			parentToMod = addModElements(modChangeRequestContainer, parentToMod);
 		}
 	}
-
+	
+	public void cleanupAllOldReferences(String modName) {
+		removeModElementsIfPresent(
+				modName, facilitiesXmlFileDOM.getRootElement(), true);
+		removeModElementsIfPresent(
+				modName, missionXmlFileDOM.getRootElement(), true);
+	}
 
 	/**
 	 * Accepts the mod element that holds the parent targeting, 
@@ -178,7 +179,7 @@ public class ModXMLHelper {
 	 * @param parentToRemoveFrom
 	 * @return
 	 */
-	public Element removeModElementsIfPresent (String modName, Element parentToRemoveFrom) {
+	public void removeModElementsIfPresent (String modName, Element parentToRemoveFrom) {
 
 		@SuppressWarnings("unchecked")
 		List<Element> potentialOldElements = parentToRemoveFrom.selectNodes("//*[@mod_name='" + modName + "']");
@@ -188,8 +189,6 @@ public class ModXMLHelper {
 				elementToRemove.detach();
 			}
 		}
-
-		return parentToRemoveFrom;
 	}
 
 	/**

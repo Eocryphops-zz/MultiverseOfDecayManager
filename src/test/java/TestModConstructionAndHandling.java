@@ -10,12 +10,13 @@ import org.testng.annotations.Test;
  * @author Phacops
  */
 public class TestModConstructionAndHandling extends LoggingHelper {
-	ModXMLHelper modXMLHelper = new ModXMLHelper();
-	ModFileUtil modFileUtil = new ModFileUtil();
+	private ModXMLHelper modXMLHelper = new ModXMLHelper();
+	private ModFileUtil modFileUtil = new ModFileUtil();
 	
-	String modTestXMLFileTarget = "src/test/resources/FortitudeModTestXML.xml";
-	String facilitiesTestXMLFileTarget = "src/test/resources/TestFacilitiesXML.xml";
-	String missionTestXMLFileTarget = "src/test/resources/TestMissionXML.xml";
+	private String modTestXMLFileTarget = "src/test/resources/FortitudeModTestXML.xml";
+	private String facilitiesTestXMLFileTarget = "src/test/resources/TestFacilitiesXML.xml";
+	private String missionTestXMLFileTarget = "src/test/resources/TestMissionXML.xml";
+	private String modTestCleanupXMLFileTarget = "src/test/resources/FortitudeModTestCleanup.xml";
 	
 	@Test (description = "Test XML element insertion")
 	public void testFullHandling () {
@@ -86,7 +87,7 @@ public class TestModConstructionAndHandling extends LoggingHelper {
 			Assert.assertEquals(item1.getName(), "Snyder_Objects");
 			
 			AND("Confirming the parsed mod_segment matches the actual XML...");
-			Assert.assertEquals(item1.getModSegment(), "Snyder Trucking Warehouse");
+			Assert.assertEquals(item1.getModSubSegment(), "Snyder Trucking Warehouse");
 			
 			AND("Confirming the parsed File to Mod matches the actual XML's <FacilitiesData> wrapper...");
 			Assert.assertEquals(item1.getFileToMod(), "FacilitiesData");
@@ -100,6 +101,33 @@ public class TestModConstructionAndHandling extends LoggingHelper {
 			LASTLY("Confirming the parsed child element count matches the actual XML...");
 			Assert.assertEquals(item1.getChildElements().size(), 1);
 			
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Failed to insert elements into XML, error was: \n" + e.getMessage());
+		}
+	}
+	
+	@Test (description = "Test XML cleanup of old mod names")
+	public void testOldModNameCleanupFromXMLs () {
+		SCENARIO("Test finding old mod names and correctly eliminating them from the XMLs, "
+				+ "which would be done prior to adding any new changes");
+		try {
+			FIRST("Building a basic test XML into the ModXML we want to parse.");
+			List<ModXML> modList = new ArrayList<ModXML>();
+			modList.add(new ModXML(modFileUtil.getXmlFileAndBuild(modTestCleanupXMLFileTarget)));
+			modXMLHelper.setModXMLs(modList);
+			
+			GIVEN("ModXML has been set...");
+			THEN("Setting the test Facilities XML");
+			modFileUtil.setFacilitiesXMLTarget(facilitiesTestXMLFileTarget);
+			AND("Setting the test Mission XML");
+			modFileUtil.setMissionXMLTarget(missionTestXMLFileTarget);
+			
+			THEN("Attempting to handle all actions "
+					+ "including capacity to cleanup mod elements with differing names");
+			modXMLHelper.handleModXMLFiles();
+			GIVEN("This was able to print");
+			THEN("We were able to successfully handle all mods without an exception.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed to insert elements into XML, error was: \n" + e.getMessage());

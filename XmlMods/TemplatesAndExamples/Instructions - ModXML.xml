@@ -9,22 +9,41 @@ mod_description - A short paragraph or two about what your mod does,
 	which will later be funneled into a description region for users to decide whether to enable or disable, 
 	For now, it just lets us have an understanding of what the end effect of this file should be.
 -->
-<ModData mod_name="NAME_OF_MOD" mod_author="AUTHOR_OF_MOD" mod_description="DESCRIPTION_OF_MOD">
+<ModData mod_name="NAME_OF_MOD" mod_segment="DIVISION_OF_MOD_IF_ANY" mod_author="AUTHOR_OF_MOD" mod_description="DESCRIPTION_OF_MOD">
 
+	<!--  For cleaning up the old names of your mod, if you change it - ignore if this isn't the case 
+		Will cleanup any element in a game file with the mod_name you add in as an Object. 
+		Fill this with an Object per old mod name you need to cleanup; 
+		although it isn't mandatory, it's nice because changing your mod name could potentially break the files -->
+	<CleanupOldModNames name="OldModNameCleanup">
+		<Objects>
+		
+			<Object Mod_Name="OLD_MOD_NAME_TO_DESTROY_ELEMENTS_FOR"/>
+			
+		</Objects>
+	</CleanupOldModNames>
 	<!-- Anything that needs to be added to the Mission_Mission0.xml needs a sub-object placed here.
 		Note that the only time this should happen is things like Entities, or Time of Day changes 
-			(a feature which is uncommon so I'll handle that later)-->
+			(a feature which is uncommon so I'll handle that later)
+			
+			parent_tag should always be Objects; could make this explicit in code, 
+			but this seemed more instructive to modders in terms of XML construction
+			-->
 	<MissionData>
-		<Objects name="NAME_Entities" mod_segment="SEGMENT_NAME" parent_tag="Objects">
+		<Objects name="NAME_Entities" mod_subsegment="SEGMENT_NAME" parent_tag="Objects">
+		
 			<Object Name="UNIQUE_NAME"/>
+			
 		</Objects>
 		
 		<!-- Example - No need to add multiple Objects here, because the Mission file just dumps everything in one bucket
 			Note: Mission_Mission0.xml items can be of many element types - 
 				but Mission can also have <Object> containers, such as decals -->
-		<Objects name="Savini_Entities" mod_segment="Savini/Riverside" parent_tag="Objects">
+		<Objects name="Savini_Entities" mod_subsegment="Savini/Riverside" parent_tag="Objects">
+		
 			<!-- Don't try to use this in a real mod - I chopped it up so it was a clearer example ;) -->
 			<Entity Name="SaviniEntity" Pos="1501.3844,800.42261,101.17547" EntityClass="SurveyPoint" EntityId="4370" EntityGuid="403D4E79B3B28330"/>
+			
 		</Objects>
 	</MissionData>
 	
@@ -40,10 +59,12 @@ mod_description - A short paragraph or two about what your mod does,
 		Note: All child entries of <Objects> for <FacilitiesData> (Prefabs, Facilities.xml file), 
 		should be of the element type <Object>.
 		-->
-		<Objects name="LOCATION_Objects" mod_segment="SEGMENT_NAME" parent_tag="ELEMENT_TYPE_TO_ADD_THIS_TO" 
+		<Objects name="LOCATION_Objects" mod_subsegment="SEGMENT_NAME" parent_tag="ELEMENT_TYPE_TO_ADD_THIS_TO" 
 			parent_name="ELEMENT_NAME_TO_ADD_THIS_TO">
+			
 			<!-- When adding an Object, note that the manager will apply your mod_name, as the last XML attribute, your mod_name -->
 			<Object Type="Brush" Name="UNIQUE_NAME" />
+			
 		</Objects>
 		
 		<!-- Example - 
@@ -58,17 +79,22 @@ mod_description - A short paragraph or two about what your mod does,
 			
 			E.g. for Snyder, you'll move in and you won't see these truck trailers until you cleanup the workshop.
 			-->
-		<Objects name="Savini_Objects" mod_segment="Savini/Riverside" parent_tag="Prefab" parent_name="riverside.command_center">
+		<Objects name="Savini_Objects" mod_subsegment="Savini/Riverside" parent_tag="Prefab" parent_name="riverside.command_center">
+		
 			<Object Type="Brush" Name="Savini_Fortitude" Pos="2.5,-2.5,0" FloorNumber="-1" Rotate="0.383,0,0,-0.924" ColorRGB="16777215" MatLayersMask="0" 
 				Prefab="objects/vehicles/musclecar/musclecar.cga" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" 
 				SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="200" MeshIntegrationType="0" NotTriangulate="0" 
 				AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" AllowInteractionMarkup="1" RndFlags="536870920"/>
+				
 		</Objects>
-		<Objects name="Snyder_Objects" mod_segment="Snyder Trucking Warehouse" parent_tag="Prefab" parent_name="warehouse.workshop">
+		<Objects name="Snyder_Objects" mod_subsegment="Snyder Trucking Warehouse" parent_tag="Prefab" parent_name="warehouse.workshop">
+		
 			<Object Type="Brush" Name="Snyder_Fortitude-Truck2" Pos="43.26796,-25.08663,0" FloorNumber="-1" Rotate="0.359,0,0,0.933" 
 				ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/industrial/truck_trailer/truck_trailer_01.cgf" />
+				
 			<Object Type="Brush" Name="Snyder_Fortitude-Truck3" Pos="32.05709,-33.00128,1.50468" FloorNumber="-1" Rotate="0.247,0.666,-0.239,0.662" 
 				ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/industrial/truck_trailer/truck_trailer_01.cgf"/>
+				
 		</Objects>
 	</FacilitiesData>
 	

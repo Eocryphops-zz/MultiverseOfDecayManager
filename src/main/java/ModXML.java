@@ -21,6 +21,7 @@ public class ModXML {
 	
 	Document modXmlFileDOM;
 	String modName;
+	String modSegment;
 	String modAuthor;
 	List<ModChangeObjectContainer> modObjects = new ArrayList<>();
 	
@@ -32,6 +33,7 @@ public class ModXML {
 	public ModXML (Document modDom) {
 		this.modXmlFileDOM = modDom;
 		this.modName = modDom.selectSingleNode("ModData").valueOf("@mod_name");
+		this.modSegment = modDom.selectSingleNode("ModData").valueOf("@mod_segment");
 		this.modAuthor = modDom.selectSingleNode("ModData").valueOf("@mod_author");
 		setModObjects();
 	}
@@ -107,5 +109,17 @@ public class ModXML {
 	 */
 	public List<ModChangeObjectContainer> getModObjects () {
 		return this.modObjects;
+	}
+	
+	public String getModName() {
+		return this.modName;
+	}
+	
+	public String getModSegment() {
+		return this.modSegment;
+	}
+	
+	public String getModAuthor() {
+		return this.modAuthor;
 	}
 }

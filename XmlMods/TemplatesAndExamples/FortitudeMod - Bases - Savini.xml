@@ -2,6 +2,10 @@
 <!DOCTYPE xml>
 <ModData mod_name="Fortitude_Mod-Bases-Savini" mod_author="phacops" mod_description="When moving into the Savini household, this adds barricades and blockades and walkways to the area">
 
+	<CleanupOldModNames>
+		<Object name="Fortitude_Mod"/>
+	</CleanupOldModNames>
+	
 	<MissionData>
 		<Objects name="Savini_Entities" mod_segment="Savini/Riverside" parent_tag="Objects">
 				<Entity Name="Fortitude_Rope1" Material="objects/props/mine/chaff" Pos="1534.6277,804.91797,96.5" EntityClass="RopeEntity" EntityId="113" EntityGuid="4F50789C2D816AB8">

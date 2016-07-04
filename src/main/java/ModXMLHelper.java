@@ -80,6 +80,7 @@ public class ModXMLHelper {
 	 * @param modChangeRequestContainer
 	 */
 	public void handleChangesForMod (ModChangeObjectContainer modChangeRequestContainer) {
+		
 		Element parentToMod = getExpectedParentElement(modChangeRequestContainer);
 		parentToMod = removeModElementsIfPresent(modChangeRequestContainer.getModName(), parentToMod);
 		parentToMod = addModElements(modChangeRequestContainer, parentToMod);
@@ -101,9 +102,32 @@ public class ModXMLHelper {
 
 		Document facilitiesXmlFileDOM = modFileUtil.getFacilitiesXmlFileDOM();
 		Document missionXmlFileDOM = modFileUtil.getMissionXmlFileDOM();
+		Element domToAddTo = facilitiesXmlFileDOM.getRootElement();
 		
-		Element domToAddTo = (modContainerElement.getFileToMod()
-				.equals("FacilitiesData")) ? facilitiesXmlFileDOM.getRootElement() : missionXmlFileDOM.getRootElement();
+		switch (modContainerElement.getFileToMod()) {
+		case "CleanupOldModNames":
+			@SuppressWarnings("unchecked")
+			List<Element> eachOldName = modContainerElement.getChildElements().get(0).selectNodes("//Object");
+			
+			for (Element element : eachOldName) {
+			removeModElementsIfPresent(
+					element.valueOf("@name"), facilitiesXmlFileDOM.getRootElement(), true);
+			removeModElementsIfPresent(
+					element.valueOf("@name"), missionXmlFileDOM.getRootElement(), true);
+			}
+			//TODO - Rework structure so that Cleanup is pre-flight, not embedded
+			return facilitiesXmlFileDOM.getRootElement();
+		case "FacilitiesData":
+			domToAddTo = facilitiesXmlFileDOM.getRootElement();
+			break;
+		case "MissionData":
+			domToAddTo = missionXmlFileDOM.getRootElement();
+			break;
+		default:
+			// TODO singular builder that gets all ModXMLs, confirms they are correctly constructed, and dumps them if they are not
+			facilitiesXmlFileDOM.getRootElement();
+		}
+		
 
 		String parentTag = modContainerElement.getParentTag();
 		String parentName = modContainerElement.getParentName();
@@ -131,6 +155,18 @@ public class ModXMLHelper {
 				return domParentElement.get(0);
 	}
 
+	/**
+	 * Dump old versions of Elements, so long as you named them in the expected fashion with your mod_name
+	 * One presumes that any version prior to this manager will require manual removal, of course
+	 * 
+	 * @param modName
+	 * @param parentToRemoveFrom
+	 * @return
+	 */
+	public void removeModElementsIfPresent (String modName, Element parentToRemoveFrom, boolean cleanup) {
+		removeModElementsIfPresent(modName, parentToRemoveFrom);
+	}
+	
 	/**
 	 * Dump old versions of Elements, so long as you named them in the expected fashion with your mod_name
 	 * One presumes that any version prior to this manager will require manual removal, of course
@@ -176,22 +212,22 @@ public class ModXMLHelper {
 			System.out.println("[INFO] - modChildObjectsToAdd contained "
 					+ "[" + modChildObjectsToAdd.size() + "]\n\n");
 		}
-		
+
 		/* 
 		 * Might look a little weird, but these do some wrapping to the mod data 
 		 * to identify it visually when browsing the physical files; 
 		 * that goes for the builder, wrapper doc, and the prepends surrounding the actual mod data.
 		 */
 		String modWrapperBuilder = "ModWrapper mod_name=\"" + modName 
-		+ "\" mod_author=\"" + modContainerElement.getModAuthor() 
-		+ "\" mod_segment=\"" + modContainerElement.getName() 
-		+ "\" ";
+				+ "\" mod_author=\"" + modContainerElement.getModAuthor() 
+				+ "\" mod_segment=\"" + modContainerElement.getName() 
+				+ "\" ";
 
 		parentToAddTo.addElement(modWrapperBuilder + "placement=\"start_tag\" />");
-		
+
 		for (Element element : modChildObjectsToAdd) {
 			element.addAttribute("mod_name", modName);
-			
+
 			parentToAddTo.addElement(element.asXML().replaceAll("^<(.*)/>$", "$1"));
 		}
 

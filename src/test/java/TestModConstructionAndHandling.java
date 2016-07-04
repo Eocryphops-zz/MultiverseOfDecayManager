@@ -80,7 +80,7 @@ public class TestModConstructionAndHandling extends LoggingHelper {
 			GIVEN("The size [price? ;)] is right...");
 			THEN("Printing the first ModChangeObjectContainer for debugging, "
 					+ "before checking the actual attributes...");
-			ModChangeObjectContainer item1 = modObjects.get(0);
+			ModChangeObjectContainer item1 = modObjects.get(1);
 			System.out.println(item1.toString());
 			
 			THEN("Confirming the parsed mod_name matches the actual XML...");

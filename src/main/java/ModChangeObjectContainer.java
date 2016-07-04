@@ -21,7 +21,7 @@ public class ModChangeObjectContainer {
 	String modAuthor;
 	String fileToMod;
 	String name;
-	String modSegment;
+	String modSubSegment;
 	String parentTag;
 	String parentName;
 	
@@ -33,10 +33,15 @@ public class ModChangeObjectContainer {
 		this.modAuthor = modAuthor;
 		this.fileToMod = fileToMod;
 		this.name = containerElement.valueOf("@name");
-		this.modSegment = containerElement.valueOf("@mod_segment");
+		this.modSubSegment = containerElement.valueOf("@mod_subsegment");
 		this.parentTag = containerElement.valueOf("@parent_tag");
 		this.parentName = containerElement.valueOf("@parent_name");
-		this.childElements = containerElement.selectNodes("//Objects[@name='" + this.name + "']/descendant::*");
+		
+		if (fileToMod.equals("CleanupOldModNames")) {
+			this.childElements = containerElement.selectNodes("//Objects/descendant::*");
+		} else {
+			this.childElements = containerElement.selectNodes("//Objects[@name='" + this.name + "']/descendant::*");
+		}
 	}
 	
 	public String getModName() {
@@ -55,8 +60,8 @@ public class ModChangeObjectContainer {
 		return name;
 	}
 
-	public String getModSegment() {
-		return modSegment;
+	public String getModSubSegment() {
+		return modSubSegment;
 	}
 
 	public String getParentTag() {
@@ -74,9 +79,9 @@ public class ModChangeObjectContainer {
 	@Override
 	public String toString() {
 		
-		return this.modSegment + "\n"
+		return this.modSubSegment + "\n"
 				+ "name: " + this.name + "\n"
-				+ "modSegment: " + this.modSegment + "\n"
+				+ "modSegment: " + this.modSubSegment + "\n"
 				+ "fileToMod: " + this.fileToMod + "\n"
 				+ "parentTag: " + this.parentTag + "\n"
 				+ "parentName: " + this.parentName + "\n"

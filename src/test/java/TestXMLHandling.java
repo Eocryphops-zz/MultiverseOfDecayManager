@@ -21,6 +21,8 @@ public class TestXMLHandling extends LoggingHelper {
 		}
 	}
 	
+	//TODO - Add more microscopic testing for checking that elements have been correctly cleaned up by the cleanup operation
+	
 	@Test (description = "Test XML element removal")
 	public void testRemoveElementsFromXMLDOM () {
 		try {

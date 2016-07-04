@@ -21,6 +21,7 @@ public class ModXML {
 	
 	Document modXmlFileDOM;
 	String modName;
+	String modSegment;
 	String modAuthor;
 	List<ModChangeObjectContainer> modObjects = new ArrayList<>();
 	
@@ -32,6 +33,7 @@ public class ModXML {
 	public ModXML (Document modDom) {
 		this.modXmlFileDOM = modDom;
 		this.modName = modDom.selectSingleNode("ModData").valueOf("@mod_name");
+		this.modSegment = modDom.selectSingleNode("ModData").valueOf("@mod_segment");
 		this.modAuthor = modDom.selectSingleNode("ModData").valueOf("@mod_author");
 		setModObjects();
 	}
@@ -43,11 +45,14 @@ public class ModXML {
 	}
 	
 	/**
-	 * Build the objects separately for facilities and mission
+	 * Build the objects separately for cleanup, facilities, and mission
+	 * Note: Any new elements must be set here explicitly - 
+	 * just an attempt at greater integrity by not parsing unwanted code
 	 */
 	private void setModObjects () {
-		setModFacilityObjects();
+		setModCleanupObjects();
 		setModMissionObjects();
+		setModFacilityObjects();
 	}
 	
 	/**
@@ -80,6 +85,23 @@ public class ModXML {
 	}
 	
 	/**
+	 * Create cleanup-related objects and add them to our list of all objects
+	 * These will be iterated for destroying deprecated elements in the game files before applying the new
+	 * This is only if a mod changes names during the course of development, 
+	 * otherwise all elements are naturally destroyed before applying the mod.
+	 */
+	private void setModCleanupObjects () {
+		@SuppressWarnings("unchecked")
+		List<Element> cleanupElements = this.modXmlFileDOM.selectNodes("//ModData/CleanupOldModNames/Objects");
+		System.out.println("\nNumber of Cleanup Elements in " + this.modName + " - [" + cleanupElements.size() + "]");
+		
+		for (Node objectsChild : cleanupElements) {
+			System.out.println("[" + this.modName + "] - [" + objectsChild.getPath() + "]");
+			modObjects.add(new ModChangeObjectContainer(this.modName, this.modAuthor, "CleanupOldModNames", objectsChild));
+		}
+	}
+	
+	/**
 	 * Get the list of all objects this mod has requested be applied to their designated files,
 	 * including both facilities-related and mission related items.
 	 * 
@@ -87,5 +109,17 @@ public class ModXML {
 	 */
 	public List<ModChangeObjectContainer> getModObjects () {
 		return this.modObjects;
+	}
+	
+	public String getModName() {
+		return this.modName;
+	}
+	
+	public String getModSegment() {
+		return this.modSegment;
+	}
+	
+	public String getModAuthor() {
+		return this.modAuthor;
 	}
 }

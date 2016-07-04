@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<ModData mod_name="Fortitude_Mod-Bases-Savini" mod_author="phacops" mod_description="When moving into the Savini household, this adds barricades and blockades and walkways to the area">
+<ModData mod_name="Fortitude_Mod" mod_segment="Bases - Savini/Riverside" mod_author="phacops" mod_description="When moving into the Savini household, this adds barricades and blockades and walkways to the area">
 
 	<MissionData>
-		<Objects name="Savini_Entities" mod_segment="Savini/Riverside" parent_tag="Objects">
+		<Objects name="Savini_Entities" mod_subsegment="Savini/Riverside" parent_tag="Objects">
 				<Entity Name="Fortitude_Rope1" Material="objects/props/mine/chaff" Pos="1534.6277,804.91797,96.5" EntityClass="RopeEntity" EntityId="113" EntityGuid="4F50789C2D816AB8">
 				 <Rope flags="55" radius="0.02" anchor_radius="0.1" num_seg="8" num_sides="4" texu="1" texv="10" ph_num_seg="16" ph_sub_vtxs="20" mass="-1" friction="2" friction_pull="2" wind="0,0,0" wind_var="0" air_resist="0" water_resist="0" joint_lim="0" max_force="0" tension="0.0049999999" maxTimeStep="0.02" minEnergy="0.0016" damping="0.2" gravity="0,0,-13">
 				  <Points>
@@ -68,7 +68,7 @@
 	
 	<FacilitiesData>
 		
-		<Objects name="Savini_Objects" mod_segment="Savini/Riverside" parent_tag="Prefab" parent_name="riverside.command_center">
+		<Objects name="Savini_Objects" mod_subsegment="Savini/Riverside" parent_tag="Prefab" parent_name="riverside.command_center">
 			<Object Type="Brush" Name="iron_balistraria49" Pos="-11,1.75,0.5" FloorNumber="-1" Rotate="0.9238795,0,0,-0.38268346" Scale="1.2,1.2,1.2" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/Fortitude/iron_balistraria.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="100" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" RndFlags="536870920"/>
 			<Object Type="Brush" Name="Fortbbq" Pos="-32.55127,2.2990112,1.5923843" FloorNumber="-1" Rotate="0.23150559,0.39396966,0.85687774,0.23864952" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/decor/yard/gas_grill/gas_grill_boom.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="100" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" RndFlags="536870920"/>
 			<Object Type="Brush" Name="proxy_module28" Pos="-33.875,-1.625,-2.875" FloorNumber="-1" Rotate="0.72537452,0,0,0.68835443" ColorRGB="16777215" MatLayersMask="0" Prefab="objects/Fortitude/proxy_module.cgf" NoCollision="0" OutdoorOnly="0" CastShadowMaps="1" RainOccluder="1" SupportSecondVisarea="0" Hideable="0" LodRatio="100" ViewDistRatio="100" MeshIntegrationType="0" NotTriangulate="0" AIRadius="-1" NoStaticDecals="0" NoAmnbShadowCaster="0" RecvWind="0" RndFlags="536870920"/>

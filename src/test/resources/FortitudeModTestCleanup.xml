@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<ModData mod_name="Fortitude_Mod" mod_segment="Cleanup testing" mod_author="phacops" mod_description="Test cleaning up an old mod name">
+	
+	<CleanupOldModNames name="OldModNameCleanup" description="Fill this with an Object per old mod name you need to cleanup; 
+		although it isn't mandatory, it's nice because changing your mod name could potentially break the files">
+		<Objects>
+		
+			<Object Mod_Name="Deprecated_Mod_Name"/>
+		
+		</Objects>
+	</CleanupOldModNames>
+	
+	<MissionData>
+		<Objects name="Savini_Entities" mod_subsegment="Savini/Riverside" parent_tag="Objects">
+		
+			<Object ADoesNotBelongInFacilities="true" Name="SaviniEntity" Pos="1501.3844,800.42261,101.17547" 
+				EntityClass="SurveyPoint" EntityId="4370" EntityGuid="403D4E79B3B28330"/>
+		
+		</Objects>
+	</MissionData>
+	
+</ModData>
